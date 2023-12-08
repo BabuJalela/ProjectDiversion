@@ -9,6 +9,7 @@ public class MainSceneHandler : SceneHandler
         base.Initialize();
 
         AddSceneController(new LogController());
+        AddSceneController(new PlayerStateMachine());
         StartCoroutine(Print());
 
     }

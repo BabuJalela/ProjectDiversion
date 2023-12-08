@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StateMachine
 {
-    public abstract class StateMachine
+    public abstract class BaseStateMachine
     {
         protected State currentState;
 

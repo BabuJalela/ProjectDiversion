@@ -13,3 +13,13 @@ public class PrintLogEvent : GameEvent
 {
 
 }
+
+public class ChangePlayerStateEvent : GameEvent
+{
+    public string stateID;
+
+    public ChangePlayerStateEvent(string stateID)
+    {
+        this.stateID = stateID;
+    }
+}
