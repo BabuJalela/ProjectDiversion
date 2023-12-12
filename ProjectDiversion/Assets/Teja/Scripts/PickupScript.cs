@@ -1,59 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickupScript : MonoBehaviour
 {
-    private GameObject PickedObj;
-    public float throwforce;
-    public float pickuprange = 10f;
+    [SerializeField] private Transform playercameratransform;
+    [SerializeField] private LayerMask pickuplayermasl;
+    [SerializeField] private Transform objectgrabpointtransform;
+
+    private Picables pickables;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) 
+        if(Input.GetKeyUp(KeyCode.E))
         {
-            Trypickup();
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-            Trythrow();
-        }
-
-       void Trypickup()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, pickuprange)) 
+            if (pickables == null)
             {
-                if (hit.collider.CompareTag("Pickup"))
-                {
-                    PickedObj = hit.collider.gameObject;
-                    PickedObj.transform.SetParent(transform);
-                }
-            }
-        }
 
-        void Trythrow()
-        {
-            if (PickedObj != null) 
+
+
+                float pickupidis = 2f;
+
+                if (Physics.Raycast(playercameratransform.transform.position, playercameratransform.forward, out RaycastHit raycasthit, pickupidis, pickuplayermasl))
+                {
+                    Debug.Log(raycasthit.transform);
+
+                    if (raycasthit.transform.TryGetComponent(out pickables))
+                    {
+                        pickables.Grab(objectgrabpointtransform);
+                        Debug.Log(pickables);
+                    }
+                }
+
+            } else
             {
-                PickedObj.transform.SetParent(null);
-                Rigidbody rb = PickedObj.GetComponent<Rigidbody>();
-
-                if (rb != null)
-                {
-                    rb.velocity = transform.forward * throwforce;
-                }
-                PickedObj = null;
+                pickables.drop();
+                pickables = null;
             }
+                
+
+                
+             
+
+            
         }
+    }
+    //public Camera cam;
 
-   }
+    //private void Start()
+    //{
+    //    //cam = Camera.main;
+    //    print(cam.name);
+    //}
 
+    //private void Update()
+    //{
+    //    Vector3 mouseposition = Input.mousePosition;
+    //    mouseposition.z = 10f;
+    //    mouseposition = cam.ScreenToWorldPoint(mouseposition);
+    //    Debug.DrawRay(transform.position, mouseposition - transform.position, Color.blue);
 
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    //        RaycastHit hit;
 
-
-
-
+    //        if (Physics.Raycast(ray, out hit, 100))
+    //        {
+    //            Debug.Log(hit.transform.name);
+    //        }
+    //    }
+    //}
 
 }
 
