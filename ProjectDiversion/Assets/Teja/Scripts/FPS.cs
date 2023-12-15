@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class FPS : MonoBehaviour
 {
+    public static FPS Instance;
     public float moveSpeed = 5f;
     public float mouseSensitivity = 2f;
 
     private CharacterController characterController;
     private Camera playerCamera;
     private float verticalRotation = 0f;
+    public bool Ismoving = false;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
-        //Cursor.lockState = CursorLockMode.Locked; // Lock cursor to the center of the screen
-      //  Cursor.visible = false; // Hide cursor
+       
     }
 
     void Update()
     {
-        // Player Movement
+
+        PlayerMovement();
+
+    }
+
+    public void PlayerMovement()
+    {
+        Ismoving = true;
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 moveDirection = transform.TransformDirection(new Vector3(horizontalInput, 0, verticalInput));
         characterController.SimpleMove(moveDirection * moveSpeed);
 
-        // Player Look (Mouse)
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
@@ -37,13 +48,6 @@ public class FPS : MonoBehaviour
 
         playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
         transform.rotation *= Quaternion.Euler(0, mouseX, 0);
-
-        // Lock and unlock cursor on escape key press
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-        //    Cursor.visible = !Cursor.visible;
-        //}
     }
 
 }
