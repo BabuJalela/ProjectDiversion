@@ -76,6 +76,7 @@ public class GoodPatrolEnemy : MonoBehaviour
 
     void PlayerCaught()
     {
+       navMeshAgent.destination = transform.position;
 
         Debug.Log("You Cannot go beoyend this point");
         

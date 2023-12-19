@@ -2482,26 +2482,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5832990100811291718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5832990100811291719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66cab22e02ff4f54b82b533be6b5de4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolPoints:
-  - {fileID: 775718984}
-  - {fileID: 1995064652}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 72
-  detectionRange: 50
-  player: {fileID: 671739664}
 --- !u!1 &5832990100811291719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,7 +2496,7 @@ GameObject:
   - component: {fileID: 5832990100811291723}
   - component: {fileID: 5832990100811291716}
   - component: {fileID: 5832990100811291717}
-  - component: {fileID: 5832990100811291718}
+  - component: {fileID: 5832990100811291724}
   m_Layer: 0
   m_Name: Good Patroling Enemy
   m_TagString: Untagged
@@ -2604,6 +2584,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5832990100811291724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832990100811291719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228b34a6388b3a440ac79384ba20f8f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolPoints:
+  - {fileID: 775718984}
+  - {fileID: 1995064652}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  detectionRange: 20
+  player: {fileID: 671739664}
 --- !u!114 &6151365292544179999
 MonoBehaviour:
   m_ObjectHideFlags: 0
