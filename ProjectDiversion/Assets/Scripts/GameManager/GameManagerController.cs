@@ -3,6 +3,8 @@ using Events;
 public class GameManagerController : IController
 {
     private GameManager gameManager;
+
+
     public void Initialize()
     {
         gameManager = new GameManager();
@@ -23,6 +25,10 @@ public class GameManagerController : IController
     public void Update()
     {
         gameManager.UpdateControllers();
+    }
+    public void FixedUpdate()
+    {
+
     }
 
     private void OnAddSceneControllerListener(AddSceneController e)

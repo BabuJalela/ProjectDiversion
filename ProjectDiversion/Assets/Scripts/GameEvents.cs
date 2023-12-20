@@ -23,3 +23,12 @@ public class ChangePlayerStateEvent : GameEvent
         this.stateID = stateID;
     }
 }
+
+public class LeverPullEvent : GameEvent
+{
+
+}
+public class FollowWaterLevelEvent : GameEvent
+{
+
+}

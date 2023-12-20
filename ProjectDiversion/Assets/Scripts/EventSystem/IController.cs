@@ -1,5 +1,3 @@
-
-
 public interface IController
 {
     /// <summary>
@@ -21,4 +19,6 @@ public interface IController
     /// Update will called once per frame
     /// </summary>
     void Update();
+
+    void FixedUpdate();
 }
