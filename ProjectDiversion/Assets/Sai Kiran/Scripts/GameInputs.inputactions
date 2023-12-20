@@ -1,5 +1,5 @@
 {
-    "name": "ActionMap",
+    "name": "GameInputs",
     "maps": [
         {
             "name": "LocoMotion",
@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "Movements",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "f651ff00-1fe5-49af-840c-be8e8ae4017a",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse",
+                    "type": "Value",
+                    "id": "7a6885f6-bc10-4933-a8d7-88c25f1eb5dc",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "Keyboard And Mouse",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70523a9e-72f3-41fd-a864-229724e9b687",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
