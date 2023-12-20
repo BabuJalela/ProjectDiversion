@@ -14,12 +14,9 @@ public class EnemyPatrol : MonoBehaviour
     public float detectionRange = 10f;
     private NavMeshAgent navMeshAgent;
     public Transform player;
-    //public Transform firePoint;
-    //public float bulletForce = 10f;
-    //public float shootcooldown = 2f;
-    //public float nextshootime = 0f;
-    //public GameObject bulletPrefab;
-    //private bool canshoot = true;
+    public GameObject playerPrefab;
+    public float stoppingDistance = 5f;
+   
 
     void Start()
     {
@@ -67,10 +64,8 @@ public class EnemyPatrol : MonoBehaviour
 
     void Patrol()
     {
-       // if (navMeshAgent.remainingDistance < 0.5f)
-        //{
             SetNextPatrolPoint();
-       // }
+      
     }
 
     void SetNextPatrolPoint()
@@ -86,26 +81,21 @@ public class EnemyPatrol : MonoBehaviour
     {
 
         Debug.Log("You Caught");
-       //if(canshoot && Time.time >= nextshootime) 
-       //{
-       //     GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);           
-       //     Rigidbody bullterb = bullet.GetComponent<Rigidbody>();
-       //     bullterb.AddForce(firePoint.forward * bulletForce, ForceMode.Impulse);
 
-       //     canshoot = false;
-       //     nextshootime = Time.time + shootcooldown;
-       //}
+        if (Vector3.Distance(transform.position, player.position) <= stoppingDistance)
+        {
+            navMeshAgent.isStopped = true;
+            //WarnigCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            navMeshAgent.isStopped = false;
+        }
+        // just for testing
+        Destroy(playerPrefab, 2f);
 
-       //if (!canshoot && Time.time >= nextshootime) 
-       //{
-       //     canshoot = true;
-       //}
     }
 
-    /*public void Spawn(Vector3 spawnposition)
-    {
-        transform.position = spawnposition;
-        gameObject.SetActive(true)
-    }*/
+   
 }
 

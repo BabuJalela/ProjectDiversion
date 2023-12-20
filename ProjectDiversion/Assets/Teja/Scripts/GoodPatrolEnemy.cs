@@ -1,86 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class GoodPatrolEnemy : MonoBehaviour
 {
-    public Transform[] patrolPoints;
-    private int currentPatrolIndex = 0;
-    public LayerMask playerLayer;
-    public float detectionRange = 10f;
+    public Transform[] patrolWaypoint;
+    public float patrolSpeed = 3f;
+    public float chaseSpeed = 5f;
+    public float stoppingDistance = 2f;
+    public LayerMask playerMask;
+    public float dectionRange = 10f;
     private NavMeshAgent navMeshAgent;
+    private int currentWaypointIndex = 0;
     public Transform player;
-   
+    public Canvas WarnigCanvas;
 
-    void Start()
+    private void Start()
     {
+        WarnigCanvas.gameObject.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
-        SetNextPatrolPoint();
+        Setnextwaypoint();
 
     }
 
-    void Update()
+    private void Update()
     {
-        if (DetectPlayer())
+        if(Dectedplayer())
         {
-            ChasePlayer();
+            Chaseplayer();
         }
         else
         {
             Patrol();
         }
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, detectionRange, playerLayer))
-        {
-            if (hit.collider.CompareTag("Player"))
-            {
-                PlayerCaught();
-            }
-        }
     }
-
-    bool DetectPlayer()
-    {
-        float distancetoplayer = Vector3.Distance(transform.position, player.position);
-        return distancetoplayer <= detectionRange;
-    }
-    void ChasePlayer()
-    {
-        Fast();
-        navMeshAgent.destination = player.position;
-    }
-    public void Fast()
-    {
-        navMeshAgent.speed = 4;
-    }
-
-
 
     void Patrol()
     {
-        // if (navMeshAgent.remainingDistance < 0.5f)
-        //{
-        SetNextPatrolPoint();
-        // }
-    }
-
-    void SetNextPatrolPoint()
-    {
-        navMeshAgent.destination = patrolPoints[currentPatrolIndex].position;
-        if (Vector3.Distance(patrolPoints[currentPatrolIndex].transform.position, transform.position) < 1)
+        navMeshAgent.speed = patrolSpeed;
+        if (navMeshAgent.remainingDistance < 0.5f)
         {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+            Setnextwaypoint();
         }
     }
 
-    void PlayerCaught()
+    void Setnextwaypoint()
     {
-       navMeshAgent.destination = transform.position;
+        navMeshAgent.destination = patrolWaypoint[currentWaypointIndex].position;
+        if (Vector3.Distance(patrolWaypoint[currentWaypointIndex].transform.position, transform.position) < 1)
+        {
+            currentWaypointIndex = (currentWaypointIndex + 1) % patrolWaypoint.Length;
+        }
 
-        Debug.Log("You Cannot go beoyend this point");
-        
     }
 
-   
+    bool Dectedplayer()
+    {
+        float distancetoplayer = Vector3.Distance(transform.position,player.position);
+        return distancetoplayer <= dectionRange;
+    }
+
+    void Chaseplayer()
+    {
+        navMeshAgent.speed = chaseSpeed;
+        navMeshAgent.destination = player.position;
+
+        if(Vector3.Distance(transform.position,player.position) <= stoppingDistance) 
+        {
+            navMeshAgent.isStopped = true;
+            WarnigCanvas.gameObject.SetActive(true);
+        }
+        else 
+        {
+            navMeshAgent.isStopped = false;
+        }
+    }
 }
