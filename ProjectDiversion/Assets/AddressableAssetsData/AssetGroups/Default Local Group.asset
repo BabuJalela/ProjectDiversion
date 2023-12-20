@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: af6d064f8e3cc3246b4c1451e9335ecb
+  m_SerializeEntries:
+  - m_GUID: e3040cd1d765e9246998717e41582f61
+    m_Address: Assets/Prefabs/Level2/WaterPipe.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3cbe3935dbd6065468c7ea5a16aea8f4
+    m_Address: Assets/Prefabs/Level2/Water.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ff34f49a32092804785063567e7a07e6
+    m_Address: Assets/Prefabs/Level2/Lever.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1fb33b8b781682844ac2f72fbb2d34bc
+    m_Address: Assets/Prefabs/Level2/ThirdPersonController.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9eb38d49e5c26964d942bd5df94d033a
+    m_Address: Assets/Prefabs/Level2/Cuboard.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 84da4e37aa172e24c94fec9389f751f9
+    m_Address: Assets/Prefabs/Level2/UIHolder.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f8dbbf2401ae1c2418a1edd245a4da7f
+    m_Address: Assets/Prefabs/Level2/Level2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f639b568ae0ec844f8134cc631e4d379
+    m_Address: Assets/Prefabs/Level2/Generator.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 088fe7219bf22c640865f62bc5d616e3
+    m_Address: Assets/Prefabs/Level2/WaterRipples.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f46af87e16244d340bb03a659809deaf, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 9c5c92464185e044abda8e03899f27da, type: 2}
+    - {fileID: 11400000, guid: 218fd7500258cb04686e701009a772db, type: 2}
