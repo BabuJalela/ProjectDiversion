@@ -69,7 +69,11 @@ public class Movements : MonoBehaviour
         Debug.Log(playerMove);
 
         moveDirection = transform.TransformVector(playerMove);
-        characterController.SimpleMove(moveSpeed * moveDirection);
+        if (!playerSprint)
+        {
+            characterController.SimpleMove(moveSpeed * moveDirection);
+        }
+
         /*if ((playerMove.x > 0 || playerMove.z > 0) || (playerMove.x < 0 || playerMove.z < 0))
         {
             animations();
@@ -94,7 +98,9 @@ public class Movements : MonoBehaviour
 
         float idleAnimValue = 0.0f;
         float walkAnimValue = 0.5f;
-        float runAnimValue = 0.5f;
+        float runAnimValue = 1f;
+
+        //animator.SetFloat(velocityZHash, Mathf.Lerp(velocityZHash, playerSprint ? playerMove.z /))
 
         if (idle)
         {
@@ -104,11 +110,11 @@ public class Movements : MonoBehaviour
         if (forward)
         {
             animator.SetFloat(velocityXHash, idleAnimValue);
-            animator.SetFloat(velocityZHash, Mathf.Lerp(idleAnimValue, walkAnimValue, Time.deltaTime));
+            animator.SetFloat(velocityZHash, walkAnimValue);
             if (forward && playerSprint)
             {
                 animator.SetFloat(velocityXHash, idleAnimValue);
-                animator.SetFloat(velocityZHash, Mathf.Lerp(walkAnimValue, runAnimValue, Time.deltaTime));
+                animator.SetFloat(velocityZHash, runAnimValue);
             }
         }
         if (backward)
