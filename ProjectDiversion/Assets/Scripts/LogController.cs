@@ -2,6 +2,11 @@ using Events;
 
 public class LogController : IController
 {
+    public void FixedUpdate()
+    {
+
+    }
+
     public void Initialize()
     {
 

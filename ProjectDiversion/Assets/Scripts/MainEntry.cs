@@ -3,17 +3,21 @@ using UnityEngine;
 public class MainEntry : MonoBehaviour
 {
     private GameManagerController gameManagerController;
-    private LogController logController;
 
     private void Awake()
     {
         gameManagerController = new GameManagerController();
         gameManagerController?.RegisterListener();
         gameManagerController?.Initialize();
+        DontDestroyOnLoad(this.gameObject);
     }
 
-    void Update()
+    private void Update()
     {
         gameManagerController?.Update();
+    }
+    private void FixedUpdate()
+    {
+        gameManagerController?.FixedUpdate();
     }
 }

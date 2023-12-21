@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -21,8 +18,7 @@ public class EnemyPatrol : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        SetNextPatrolPoint();
-        
+        SetNextPatrolPoint();        
     }
 
     void Update()
@@ -95,7 +91,8 @@ public class EnemyPatrol : MonoBehaviour
         Destroy(playerPrefab, 2f);
 
     }
-
+    //2.5 - L;
    
 }
 
+ 
