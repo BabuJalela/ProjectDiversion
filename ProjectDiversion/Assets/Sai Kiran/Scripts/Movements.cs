@@ -13,6 +13,7 @@ public class Movements : MonoBehaviour
     private Vector2 mouseDelta;
     private Vector3 moveDirection;
     public float moveSpeed;
+    //public float
     private float gravity = -9.8f;
     /*private float velocityX = 0.0f;
     private float velocityZ = 0.0f;*/
@@ -69,7 +70,11 @@ public class Movements : MonoBehaviour
         Debug.Log(playerMove);
 
         moveDirection = transform.TransformVector(playerMove);
-        if (!playerSprint)
+        if (playerSprint)
+        {
+            characterController.SimpleMove(moveSpeed * moveDirection);
+        }
+        else
         {
             characterController.SimpleMove(moveSpeed * moveDirection);
         }
@@ -87,8 +92,13 @@ public class Movements : MonoBehaviour
 
     private void animations()
     {
-        /*animator.SetFloat(velocityXHash, Mathf.Lerp(velocityXHash, playerMove.x, 1 * Time.deltaTime));
-        animator.SetFloat(velocityZHash, Mathf.Lerp(velocityZHash, playerMove.z, 1 * Time.deltaTime));*/
+        animator.SetFloat("VelocityX", playerMove.x / (playerSprint ? 1f : 2f));
+        animator.SetFloat("VelocityZ", playerMove.z / (playerSprint ? 1f : 2f));
+
+        /*
+
+        //animator.SetFloat(velocityXHash, Mathf.Lerp(velocityXHash, playerMove.x, 1 * Time.deltaTime));
+        //animator.SetFloat(velocityZHash, Mathf.Lerp(velocityZHash, playerMove.z, 1 * Time.deltaTime));
 
         bool idle = playerMove.x == 0.0f && playerMove.z == 0.0f;
         bool forward = playerMove.z > 0.0f && playerMove.z <= 1f;
@@ -142,7 +152,9 @@ public class Movements : MonoBehaviour
                 animator.SetFloat(velocityZHash, idleAnimValue);
             }
         }
+        */
     }
+
     private void LateUpdate()
     {
         Vector3 facingDirection = Vector3.Cross(mainCamera.transform.right, Vector3.up);
