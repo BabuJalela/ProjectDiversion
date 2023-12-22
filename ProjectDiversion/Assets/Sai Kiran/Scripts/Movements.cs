@@ -7,13 +7,14 @@ public class Movements : MonoBehaviour
     public CharacterController characterController;
     public Animator animator;
     public Camera mainCamera;
+    public float transitionMultiplier = 10f;
 
     private Vector3 playerMove;
     private bool playerSprint;
     private Vector2 mouseDelta;
     private Vector3 moveDirection;
     public float moveSpeed;
-    //public float
+    public float sprintSpeed;
     private float gravity = -9.8f;
     /*private float velocityX = 0.0f;
     private float velocityZ = 0.0f;*/
@@ -58,9 +59,15 @@ public class Movements : MonoBehaviour
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
-
+    public float a;
+    public float b;
+    public float lerpValue;
+    public float result;
     private void Update()
     {
+        result = Mathf.Lerp(a, b, lerpValue);
+        Debug.Log(result);
+
         Move();
         animations();
 
@@ -72,7 +79,7 @@ public class Movements : MonoBehaviour
         moveDirection = transform.TransformVector(playerMove);
         if (playerSprint)
         {
-            characterController.SimpleMove(moveSpeed * moveDirection);
+            characterController.SimpleMove(sprintSpeed * moveDirection);
         }
         else
         {
@@ -92,8 +99,15 @@ public class Movements : MonoBehaviour
 
     private void animations()
     {
-        animator.SetFloat("VelocityX", playerMove.x / (playerSprint ? 1f : 2f));
-        animator.SetFloat("VelocityZ", playerMove.z / (playerSprint ? 1f : 2f));
+        Vector2 intended = new Vector2(playerMove.x, playerMove.z);
+        intended /= (playerSprint ? 1f : 2f);
+
+        Vector2 currentValue = new Vector2(animator.GetFloat("VelocityX"), animator.GetFloat("VelocityZ"));
+
+        Vector2 result = Vector2.Lerp(currentValue, intended, transitionMultiplier * Time.deltaTime);
+
+        animator.SetFloat("VelocityX", result.x);
+        animator.SetFloat("VelocityZ", result.y);
 
         /*
 
