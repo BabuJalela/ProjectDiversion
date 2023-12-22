@@ -9,9 +9,12 @@ public class FPS : MonoBehaviour
     public float mouseSensitivity = 2f;
 
     private CharacterController characterController;
+    private float normalCharacterControllerHeight;
+    public float crouchHeight = 0.5f;
     private Camera playerCamera;
     private float verticalRotation = 0f;
     public bool Ismoving = false;
+    private bool iscrouching = false;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class FPS : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        normalCharacterControllerHeight = characterController.height;
        
     }
 
@@ -28,9 +32,40 @@ public class FPS : MonoBehaviour
     {
 
         PlayerMovement();
+        HadelCrouchInput();
 
     }
 
+    void HadelCrouchInput()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ToggleCrouch();
+        }
+    }
+
+    void ToggleCrouch()
+    {
+        iscrouching = !iscrouching;
+        if(iscrouching)
+        {
+            Crouch();
+        }
+        else
+        {
+            StandUp();
+        }
+    }
+
+    void Crouch()
+    {
+        characterController.height = crouchHeight;
+    }
+
+    void StandUp()
+    {
+        characterController.height = normalCharacterControllerHeight;
+    }
     public void PlayerMovement()
     {
         Ismoving = true;

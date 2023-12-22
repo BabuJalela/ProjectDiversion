@@ -13,6 +13,7 @@ public class EnemyPatrol : MonoBehaviour
     public Transform player;
     public GameObject playerPrefab;
     public float stoppingDistance = 5f;
+    public Transform raycastpoint;
    
 
     void Start()
@@ -32,7 +33,7 @@ public class EnemyPatrol : MonoBehaviour
            Patrol();
         }
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, detectionRange, playerLayer))
+        if (Physics.Raycast(raycastpoint.transform.position, transform.forward, out hit, detectionRange, playerLayer))
         {
             if (hit.collider.CompareTag("Player"))
             {
@@ -91,7 +92,7 @@ public class EnemyPatrol : MonoBehaviour
         Destroy(playerPrefab, 2f);
 
     }
-    //2.5 - L;
+    
    
 }
 

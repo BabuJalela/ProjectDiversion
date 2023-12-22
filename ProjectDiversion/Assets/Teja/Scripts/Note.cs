@@ -8,7 +8,13 @@ public class Note : MonoBehaviour
     public float moveSpeed = 2f;
     public float DisplayTime = 3f;
     public Transform textDisplay;
+    public GameObject specialtreeSET;
 
+
+    private void Start()
+    {
+        specialtreeSET.SetActive(false);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,6 +30,7 @@ public class Note : MonoBehaviour
 
     private void DisplayText()
     {
+        specialtreeSET.SetActive(true);
         textDisplay.gameObject.SetActive(true);
         Invoke("Hidetext" , DisplayTime);
     }
