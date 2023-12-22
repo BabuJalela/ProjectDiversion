@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 69cda6be775c4b8428c1ba579a0d3c3f, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: a039097bcb80b4d458eede4dfa75db39, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -359,6 +359,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 766719646477876702, guid: 1fb33b8b781682844ac2f72fbb2d34bc, type: 3}
+      propertyPath: m_Mass
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 766719646483151246, guid: 1fb33b8b781682844ac2f72fbb2d34bc, type: 3}
       propertyPath: m_Name
       value: ThirdPersonController

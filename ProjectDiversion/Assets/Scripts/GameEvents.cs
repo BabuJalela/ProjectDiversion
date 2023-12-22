@@ -32,3 +32,12 @@ public class FollowWaterLevelEvent : GameEvent
 {
 
 }
+
+public class DoorOpenEvent : GameEvent
+{
+    public bool isDoorOpen = false;
+    public DoorOpenEvent(bool isDoorOpen)
+    {
+        this.isDoorOpen = isDoorOpen;
+    }
+}
