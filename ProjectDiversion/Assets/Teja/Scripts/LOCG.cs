@@ -17,7 +17,3 @@ public class LOCG : MonoBehaviour
 
     }
 }
-//2004 - 2005 year - 8.5lakhs  bills - 10 lakhs * 7000
-//1998 year - 
-//ifss  utib0002178
-// acc 921010036475851

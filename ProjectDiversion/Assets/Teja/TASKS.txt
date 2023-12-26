@@ -1,0 +1,5 @@
+26-12-2023
+added outliner effect to the objects
+created a script it will add every object material when it hit a ray..
+we need to convert and intigrate into the picables script and test
+creat a end for the level.

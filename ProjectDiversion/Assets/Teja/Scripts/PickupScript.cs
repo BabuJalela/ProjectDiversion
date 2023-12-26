@@ -8,6 +8,8 @@ public class PickupScript : MonoBehaviour
     [SerializeField] private Transform playercameratransform;
     [SerializeField] private LayerMask pickuplayermasl;
     [SerializeField] private Transform objectgrabpointtransform;
+    private Picables pic;
+    
 
     private Picables pickables;
 
@@ -29,6 +31,7 @@ public class PickupScript : MonoBehaviour
                     if (raycasthit.transform.TryGetComponent(out pickables))
                     {
                         pickables.Grab(objectgrabpointtransform);
+                        pic.togglematerial();
                         Debug.Log(pickables);
                     }
                 }

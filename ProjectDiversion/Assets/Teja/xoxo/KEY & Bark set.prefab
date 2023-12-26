@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 7407278325954996995}
   - component: {fileID: 3274238557084415307}
   - component: {fileID: 1238441640177405953}
+  - component: {fileID: 2760086021605086842}
   m_Layer: 0
   m_Name: bark_bowl_tall_LP_bark_bowl_tall_LP
   m_TagString: Untagged
@@ -713,6 +714,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2760086021605086842
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6419375748045991078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.317961, y: 9.432651, z: 12.31796}
+  m_Center: {x: 0.008579969, y: 4.7163243, z: -0.008460045}
 --- !u!1 &6951072124403675186
 GameObject:
   m_ObjectHideFlags: 0
