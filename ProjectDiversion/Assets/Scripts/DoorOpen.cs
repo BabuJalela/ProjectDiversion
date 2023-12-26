@@ -5,7 +5,6 @@ public class DoorOpen : MonoBehaviour
 {
     [SerializeField] private Vector3 finalPosition;
     private Quaternion initialRotation;
-    private bool isOpen = false;
     private bool canOpen = false;
     private bool canClose = false;
     // Start is called before the first frame update

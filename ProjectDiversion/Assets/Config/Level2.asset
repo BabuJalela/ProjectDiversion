@@ -52,7 +52,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
   - ObjectId: Player
     levelObjects:
-      m_AssetGUID: 1fb33b8b781682844ac2f72fbb2d34bc
+      m_AssetGUID: ef704e149db4e6d4da4c43447ba62bea
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0

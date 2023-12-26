@@ -53,6 +53,14 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Level2/WaterRipples.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: ef704e149db4e6d4da4c43447ba62bea
+    m_Address: Assets/Prefabs/Player/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b40844b87f41eed40869161b7dcdc587
+    m_Address: Assets/Prefabs/Level2/DoorWall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f46af87e16244d340bb03a659809deaf, type: 2}
   m_SchemaSet:
