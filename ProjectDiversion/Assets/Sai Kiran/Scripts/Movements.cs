@@ -59,18 +59,11 @@ public class Movements : MonoBehaviour
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
-    public float a;
-    public float b;
-    public float lerpValue;
-    public float result;
+
     private void Update()
     {
-        result = Mathf.Lerp(a, b, lerpValue);
-        Debug.Log(result);
-
         Move();
         animations();
-
     }
     private void Move()
     {
@@ -85,16 +78,6 @@ public class Movements : MonoBehaviour
         {
             characterController.SimpleMove(moveSpeed * moveDirection);
         }
-
-        /*if ((playerMove.x > 0 || playerMove.z > 0) || (playerMove.x < 0 || playerMove.z < 0))
-        {
-            animations();
-        }
-        else
-        {
-            animator.SetFloat(velocityXHash, 0);
-            animator.SetFloat(velocityZHash, 0);
-        }*/
     }
 
     private void animations()
@@ -108,65 +91,6 @@ public class Movements : MonoBehaviour
 
         animator.SetFloat("VelocityX", result.x);
         animator.SetFloat("VelocityZ", result.y);
-
-        /*
-
-        //animator.SetFloat(velocityXHash, Mathf.Lerp(velocityXHash, playerMove.x, 1 * Time.deltaTime));
-        //animator.SetFloat(velocityZHash, Mathf.Lerp(velocityZHash, playerMove.z, 1 * Time.deltaTime));
-
-        bool idle = playerMove.x == 0.0f && playerMove.z == 0.0f;
-        bool forward = playerMove.z > 0.0f && playerMove.z <= 1f;
-        bool backward = playerMove.z < 0.0f && playerMove.z >= -1f;
-        bool right = playerMove.x > 0.0f && playerMove.x <= 1f;
-        bool left = playerMove.x < 0.0f && playerMove.x >= -1f;
-
-        float idleAnimValue = 0.0f;
-        float walkAnimValue = 0.5f;
-        float runAnimValue = 1f;
-
-        //animator.SetFloat(velocityZHash, Mathf.Lerp(velocityZHash, playerSprint ? playerMove.z /))
-
-        if (idle)
-        {
-            animator.SetFloat(velocityXHash, idleAnimValue);
-            animator.SetFloat(velocityZHash, idleAnimValue);
-        }
-        if (forward)
-        {
-            animator.SetFloat(velocityXHash, idleAnimValue);
-            animator.SetFloat(velocityZHash, walkAnimValue);
-            if (forward && playerSprint)
-            {
-                animator.SetFloat(velocityXHash, idleAnimValue);
-                animator.SetFloat(velocityZHash, runAnimValue);
-            }
-        }
-        if (backward)
-        {
-            animator.SetFloat(velocityXHash, idleAnimValue);
-            animator.SetFloat(velocityZHash, -walkAnimValue);
-        }
-        if (right)
-        {
-            animator.SetFloat(velocityXHash, walkAnimValue);
-            animator.SetFloat(velocityZHash, idleAnimValue);
-            if (right && playerSprint)
-            {
-                animator.SetFloat(velocityXHash, runAnimValue);
-                animator.SetFloat(velocityZHash, idleAnimValue);
-            }
-        }
-        if (left)
-        {
-            animator.SetFloat(velocityXHash, -walkAnimValue);
-            animator.SetFloat(velocityZHash, idleAnimValue);
-            if (left && playerSprint)
-            {
-                animator.SetFloat(velocityXHash, -runAnimValue);
-                animator.SetFloat(velocityZHash, idleAnimValue);
-            }
-        }
-        */
     }
 
     private void LateUpdate()
@@ -189,56 +113,4 @@ public class Movements : MonoBehaviour
         inputActions.LocoMotion.Mouse.performed -= Mouse;
         inputActions.LocoMotion.Mouse.canceled -= Mouse;
     }
-    /*        if 0.0f idle
-          0.5 walk right, 1 run right -x axis
-          - 0.5 walk left, -1 run left -x axis
-          0.5 walk right, 1 run right -y axis
-          0.5 walk right -y axis
-
-          remove hardCode Values*/
-
-    /* bool idle = playerMove.x == 0.0f && playerMove.z == 0.0f;
-     bool forward = playerMove.z > 0.0f && playerMove.z <= 1f;
-     bool backward = playerMove.z < 0.0f && playerMove.z >= -1f;
-     bool right = playerMove.x > 0.0f && playerMove.x <= 1f;
-     bool left = playerMove.x < 0.0f && playerMove.x >= -1f;
-
-     bool idleAnim = velocityX == 0.0f && velocityZ == 0.0f;
-     bool walkForwardAnim = velocityZ > 0.0f && velocityZ <= 0.5f;
-     bool runForwardAnim = velocityZ > 0.5f && velocityZ <= 1f;
-     bool walkBackwardAnim = velocityZ < 0.0f && velocityZ >= -0.5f;
-     bool walkRightAnim = velocityX > 0.0f && velocityX <= 0.5f;
-     bool runRightAnim = velocityX > 0.5f && velocityX <= 1f;
-     bool walkLeftAnim = velocityX < 0.0f && velocityX >= -0.5f;
-     bool runLeftAnim = velocityX < -0.5f && velocityX >= -1f;
-
-     velocityX = playerMove.x;
-     velocityZ = playerMove.z;*/
-
-    /*if (idleAnim && idle)
-    {
-        Debug.Log("idle");
-
-        velocityX = playerMove.x;
-        velocityZ = playerMove.z;
-
-    }
-    if (forward && walkForwardAnim)
-    {
-        Debug.Log("forward");
-        velocityX = playerMove.x / 2;
-    }
-    if (backward && walkBackwardAnim)
-    {
-        Debug.Log("backward");
-    }
-    if (left && walkLeftAnim)
-    {
-        Debug.Log("left");
-    }
-    if (right && walkRightAnim)
-    {
-        Debug.Log("right");
-    }*/
-
 }
