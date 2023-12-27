@@ -28,6 +28,8 @@ public class Movements : MonoBehaviour
         velocityXHash = Animator.StringToHash("VelocityX");
         velocityZHash = Animator.StringToHash("VelocityZ");
         characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         inputActions = new GameInputs();
         inputActions.Enable();
         inputActions.LocoMotion.Movements.started += GetMove;
