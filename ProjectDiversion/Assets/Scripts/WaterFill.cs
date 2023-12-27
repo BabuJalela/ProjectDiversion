@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaterFill : MonoBehaviour
 {
-    private float speed = 0.01f;
+    [SerializeField] private float speed = 0.05f;
     [SerializeField] private bool isFill = false;
     // Start is called before the first frame update
 
@@ -28,7 +28,7 @@ public class WaterFill : MonoBehaviour
 
     private void OnLeverPull(LeverPullEvent e)
     {
-        isFill = true;
+        isFill = e.canFill;
     }
 
     private void OnDisable()

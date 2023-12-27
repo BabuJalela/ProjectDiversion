@@ -9,6 +9,7 @@ public abstract class AudioManager
 
 public class Level2AudioManager : AudioManager
 {
+
     public override void OnStart()
     {
 
@@ -19,13 +20,22 @@ public class Level2AudioManager : AudioManager
 
     }
 
-    public static void OnLeverPull()
+    public void OnLeverPull(bool isGeneratorActive)
     {
-        SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<AudioSource>().Play();
+        AudioSource generatorAudioSource = SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<AudioSource>();
         GameObject waterPipe = SpawnObjectAddressables.GetLevelDatathroughID("WaterPipe");
         AudioSource[] audioSources = waterPipe.GetComponentsInChildren<AudioSource>();
-        audioSources[0].Stop();
-        audioSources[1].PlayDelayed(3f);
+        if (isGeneratorActive)
+        {
+            generatorAudioSource.Play();
+            audioSources[0].Stop();
+            audioSources[1].PlayDelayed(3f);
+        }
+        else
+        {
+            generatorAudioSource.Stop();
+            audioSources[1].Stop();
+        }
     }
 
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 public class ObjectFloat : MonoBehaviour
 {
     [SerializeField] private bool isFloat = false;
-    public Transform waterInitialPoint;
+    private Transform waterInitialPoint;
     float angle = 0;
     // Start is called before the first frame update
     void Start()
     {
-
+        waterInitialPoint = SpawnObjectAddressables.GetLevelDatathroughID("Water").transform;
     }
 
     // Update is called once per frame

@@ -1,30 +1,42 @@
 using Events;
 using UnityEngine;
 
-public abstract class LevelManager
+public class Level2Manager
 {
-    public abstract void OnStart();
-    public abstract void OnUpdate();
-
-}
-
-public class Level2Manager : LevelManager
-{
-    public override void OnStart()
-    {
-        SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 5;
-    }
-
-    public override void OnUpdate()
+    private bool isGeneratorActive = true;
+    public void OnStart()
     {
 
     }
 
-    public static string OnLeverPull()
+    public void OnUpdate()
     {
-        SpawnObjectAddressables.GetLevelDatathroughID("WaterPipe").GetComponentInChildren<ParticleSystem>().Play();
-        GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent());
-        SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 1;
-        return nameof(OnLeverPull);
+        GeneratorMalfunction();
+    }
+
+    public void OnLeverPull(bool isGeneratorActive)
+    {
+        ParticleSystem waterFallPS = SpawnObjectAddressables.GetLevelDatathroughID("WaterPipe").GetComponentInChildren<ParticleSystem>();
+        if (isGeneratorActive)
+        {
+            waterFallPS.Play();
+            GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent(true));
+            SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 1;
+        }
+        else
+        {
+            waterFallPS.Stop();
+            GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent(false));
+            SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 0;
+        }
+    }
+
+    private void GeneratorMalfunction()
+    {
+        if (SpawnObjectAddressables.GetLevelDatathroughID("Water").transform.position.y > SpawnObjectAddressables.GetLevelDatathroughID("Generator").transform.position.y && isGeneratorActive)
+        {
+            GameEventManager.Instance.TriggerEvent(new LeverPullEvent(false));
+            isGeneratorActive = false;
+        }
     }
 }

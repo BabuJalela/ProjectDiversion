@@ -2,10 +2,11 @@ using Events;
 
 public class AudioController : IController
 {
-    private AudioManager audioManager;
+    private Level2AudioManager level2AudioManager;
     public void Initialize()
     {
-        audioManager?.OnStart();
+        level2AudioManager = new Level2AudioManager();
+        level2AudioManager.OnStart();
     }
 
     public void RegisterListener()
@@ -24,13 +25,13 @@ public class AudioController : IController
     }
     public void Update()
     {
-        audioManager?.OnUpdate();
+        level2AudioManager.OnUpdate();
     }
 
     #region LEVEL2 AUDIO MANAGER
     private void LeverPull(LeverPullEvent e)
     {
-        Level2AudioManager.OnLeverPull();
+        level2AudioManager.OnLeverPull(e.canFill);
     }
     #endregion
 }

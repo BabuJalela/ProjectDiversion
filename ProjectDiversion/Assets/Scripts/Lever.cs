@@ -23,7 +23,7 @@ public class Lever : MonoBehaviour
         {
             animator.SetTrigger("isPlay");
             audioSource.PlayDelayed(0.5f);
-            GameEventManager.Instance.TriggerEvent(new LeverPullEvent());
+            GameEventManager.Instance.TriggerEvent(new LeverPullEvent(true));
             leverText.gameObject.SetActive(false);
             canPullLever = false;
             isActive = true;

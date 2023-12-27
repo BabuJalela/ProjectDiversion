@@ -2,9 +2,11 @@ using Events;
 
 public class LevelController : IController
 {
+    Level2Manager level2Manager;
     public void Initialize()
     {
-
+        level2Manager = new Level2Manager();
+        level2Manager.OnStart();
     }
 
     public void RegisterListener()
@@ -26,13 +28,13 @@ public class LevelController : IController
 
     public void Update()
     {
-
+        level2Manager.OnUpdate();
     }
 
     #region Level2
     private void OnLeverPull(LeverPullEvent e)
     {
-        Level2Manager.OnLeverPull();
+        level2Manager.OnLeverPull(e.canFill);
     }
 
     #endregion

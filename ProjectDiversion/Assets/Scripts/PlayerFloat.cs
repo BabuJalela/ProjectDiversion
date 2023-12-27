@@ -4,7 +4,8 @@ public class PlayerFloat : MonoBehaviour
 {
     [SerializeField]
     float buoyancy_force;
-    Rigidbody rig;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] Rigidbody rig;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +15,10 @@ public class PlayerFloat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float y_pos = transform.position.y;
-        if (y_pos < 0)
+        if (SpawnObjectAddressables.GetLevelDatathroughID("Water").transform.position.y < transform.position.y)
         {
-            rig.AddForce(transform.up * buoyancy_force);
+            transform.position = new Vector3(transform.position.x, SpawnObjectAddressables.GetLevelDatathroughID("Water").transform.position.y, transform.position.z);
+
         }
     }
 }

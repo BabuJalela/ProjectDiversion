@@ -13,11 +13,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2371266064024664734, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
       propertyPath: m_Name
-      value: WaterProNighttime Variant
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 2371266064024664734, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2371266064024664734, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 2371266064024664734, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2371266064025085630, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
       propertyPath: m_RootOrder

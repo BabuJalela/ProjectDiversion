@@ -61,6 +61,10 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Player/Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 436eb00e87de0e543b1d7085d66f199f
+    m_Address: Assets/Prefabs/ExitCam.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f46af87e16244d340bb03a659809deaf, type: 2}
   m_SchemaSet:

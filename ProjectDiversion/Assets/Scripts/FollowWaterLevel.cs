@@ -25,7 +25,7 @@ public class FollowWaterLevel : MonoBehaviour
 
     private void WaterRippleFollowWaterLevel(FollowWaterLevelEvent e)
     {
-        isWaterFilling = true;
+        isWaterFilling = e.canFollowWaterLevel;
     }
 
     private void OnDisable()

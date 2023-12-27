@@ -26,11 +26,21 @@ public class ChangePlayerStateEvent : GameEvent
 
 public class LeverPullEvent : GameEvent
 {
+    public bool canFill = false;
 
+    public LeverPullEvent(bool canFill = false)
+    {
+        this.canFill = canFill;
+    }
 }
 public class FollowWaterLevelEvent : GameEvent
 {
+    public bool canFollowWaterLevel = false;
 
+    public FollowWaterLevelEvent(bool canFollowWaterLevel)
+    {
+        this.canFollowWaterLevel = canFollowWaterLevel;
+    }
 }
 
 public class DoorOpenEvent : GameEvent
@@ -40,4 +50,9 @@ public class DoorOpenEvent : GameEvent
     {
         this.isDoorOpen = isDoorOpen;
     }
+}
+
+public class GeneratorMalfunctionEvent : GameEvent
+{
+
 }
