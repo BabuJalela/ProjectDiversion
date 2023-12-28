@@ -7,23 +7,19 @@ public class Picables : MonoBehaviour
 {
     public Rigidbody rb;
     private Transform objectgrabpointtransform;
-    public Material outlinemat;
-    private Renderer objectrender;
+    
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
-    private void Start()
-    {
-        objectrender = GetComponent<Renderer>();
-    }
+   
 
 
     public void Grab(Transform objectgrabpointtransform)
     {
         this.objectgrabpointtransform = objectgrabpointtransform;
-       // togglematerial();
+       
         rb.useGravity = false;
     }
 
@@ -45,13 +41,5 @@ public class Picables : MonoBehaviour
         }
     }
 
-    public void togglematerial()
-    {
-        if (outlinemat != null && objectrender != null)
-        {
-            Material[] materials = objectrender.materials;
-            ArrayUtility.Add(ref materials, outlinemat);
-            objectrender.materials = materials;
-        }
-    }
+    
 }
