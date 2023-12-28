@@ -17,15 +17,18 @@ public class Level2Manager
     public void OnLeverPull(bool isGeneratorActive)
     {
         ParticleSystem waterFallPS = SpawnObjectAddressables.GetLevelDatathroughID("WaterPipe").GetComponentInChildren<ParticleSystem>();
+        ParticleSystem waterFallPS2 = SpawnObjectAddressables.GetLevelDatathroughID("WaterPipe2").GetComponentInChildren<ParticleSystem>();
         if (isGeneratorActive)
         {
             waterFallPS.Play();
+            waterFallPS2.Play();
             GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent(true));
             SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 1;
         }
         else
         {
             waterFallPS.Stop();
+            waterFallPS2.Stop();
             GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent(false));
             SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 0;
         }
@@ -39,4 +42,5 @@ public class Level2Manager
             isGeneratorActive = false;
         }
     }
+
 }

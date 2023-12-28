@@ -62,3 +62,9 @@ MonoBehaviour:
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
+  - ObjectId: WaterPipe2
+    levelObjects:
+      m_AssetGUID: 5534954496577b94580e9471873dd2bd
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

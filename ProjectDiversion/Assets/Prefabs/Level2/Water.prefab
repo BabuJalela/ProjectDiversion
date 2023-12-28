@@ -16,6 +16,10 @@ PrefabInstance:
       value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 2371266064024664734, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2371266064024664734, guid: cef797c726c762541bebae7dc6b5a2d3, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

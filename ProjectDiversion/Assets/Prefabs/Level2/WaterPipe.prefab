@@ -235,17 +235,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1255113303499666448}
     m_Modifications:
+    - target: {fileID: 1000010043017536, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011026649362, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1000011026649362, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1000013166756252, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013166756252, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013195915168, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013559245672, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000013559245672, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013890232348, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014006286940, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000014006286940, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
       propertyPath: m_IsActive
@@ -254,6 +282,10 @@ PrefabInstance:
     - target: {fileID: 1000014033464604, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
       propertyPath: m_Name
       value: WaterfallSmallEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014033464604, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000014033464604, guid: e0ea35e989dfcd043b42d7053b546abc, type: 3}
       propertyPath: m_IsActive
