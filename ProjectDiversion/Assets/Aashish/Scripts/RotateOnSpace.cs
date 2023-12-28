@@ -7,16 +7,32 @@ public class RotateOnSpace : MonoBehaviour
     private float initialRotationZ = 0f;
     private Quaternion targetRotation;
 
+    private bool startRotation = false;
+
     public float rotationSpeed = 60f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            targetRotation = Quaternion.Euler(initialRotationX, initialRotationY, initialRotationZ);
-        }
+        rotate();
+    }
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    public void rotate()
+    {
+        if (startRotation)
+        { 
+            targetRotation = Quaternion.Euler(initialRotationX, initialRotationY, initialRotationZ);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    public void yesRotate()
+    {
+        startRotation = true;
+    }
+
+    public void noRotate()
+    {
+        startRotation = false;
     }
 }
