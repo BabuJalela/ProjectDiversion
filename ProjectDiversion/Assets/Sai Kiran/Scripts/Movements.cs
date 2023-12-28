@@ -12,14 +12,20 @@ public class Movements : MonoBehaviour
     private Vector3 playerMove;
     private bool playerSprint;
     private Vector2 mouseDelta;
+    private bool playerInteract;
     private Vector3 moveDirection;
     public float moveSpeed;
     public float sprintSpeed;
-    private float gravity = -9.8f;
+    //public float gravity = 9.8f;
     /*private float velocityX = 0.0f;
     private float velocityZ = 0.0f;*/
     private int velocityXHash;
     private int velocityZHash;
+
+    // IK
+    public Transform rightToHold;
+    public Transform leftToHold;
+    float positionweight = 0f;
 
     private void OnEnable()
     {
@@ -32,24 +38,27 @@ public class Movements : MonoBehaviour
         Cursor.visible = false;
         inputActions = new GameInputs();
         inputActions.Enable();
-        inputActions.LocoMotion.Movements.started += GetMove;
-        inputActions.LocoMotion.Movements.performed += GetMove;
-        inputActions.LocoMotion.Movements.canceled += GetMove;
+        inputActions.Player.Movements.started += GetMove;
+        inputActions.Player.Movements.performed += GetMove;
+        inputActions.Player.Movements.canceled += GetMove;
 
-        inputActions.LocoMotion.Sprint.started += Sprint;
-        inputActions.LocoMotion.Sprint.performed += Sprint;
-        inputActions.LocoMotion.Sprint.canceled += Sprint;
+        inputActions.Player.Sprint.started += Sprint;
+        inputActions.Player.Sprint.performed += Sprint;
+        inputActions.Player.Sprint.canceled += Sprint;
 
-        inputActions.LocoMotion.Mouse.started += Mouse;
-        inputActions.LocoMotion.Mouse.performed += Mouse;
-        inputActions.LocoMotion.Mouse.canceled += Mouse;
+        inputActions.Player.Mouse.started += Mouse;
+        inputActions.Player.Mouse.performed += Mouse;
+        inputActions.Player.Mouse.canceled += Mouse;
+
+        inputActions.Player.Interactions.started += Interactions;
+        inputActions.Player.Interactions.performed += Interactions;
+        inputActions.Player.Interactions.canceled += Interactions;
     }
 
 
     private void GetMove(InputAction.CallbackContext context)
     {
         playerMove.x = context.ReadValue<Vector2>().x;
-        playerMove.y = gravity;
         playerMove.z = context.ReadValue<Vector2>().y;
     }
     private void Sprint(InputAction.CallbackContext context)
@@ -60,6 +69,10 @@ public class Movements : MonoBehaviour
     private void Mouse(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
+    }
+    private void Interactions(InputAction.CallbackContext context)
+    {
+        playerInteract = context.ReadValueAsButton();
     }
 
     private void Update()
@@ -79,6 +92,34 @@ public class Movements : MonoBehaviour
         else
         {
             characterController.SimpleMove(moveSpeed * moveDirection);
+        }
+    }
+
+    private void OnAnimatorIK()
+    {
+        if (animator)
+        {
+            if (playerInteract)
+            {
+                if (rightToHold != null && leftToHold != null)
+                {
+                    animator.Play("Braced Hang To Crouch");
+                    animator.SetIKPosition(AvatarIKGoal.RightHand, rightToHold.position);
+                    animator.SetIKPosition(AvatarIKGoal.LeftHand, leftToHold.position);
+
+                    positionweight += Time.deltaTime;
+                    positionweight = Mathf.Clamp(positionweight, 0f, 1f);
+                    animator.SetIKPositionWeight(AvatarIKGoal.RightHand, positionweight);
+                    animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, positionweight);
+                }
+            }
+            else
+            {
+                positionweight -= Time.deltaTime;
+                positionweight = Mathf.Clamp(positionweight, 0f, 1f);
+                animator.SetIKPositionWeight(AvatarIKGoal.RightHand, positionweight);
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, positionweight);
+            }
         }
     }
 
@@ -103,16 +144,20 @@ public class Movements : MonoBehaviour
     private void OnDisable()
     {
         inputActions.Disable();
-        inputActions.LocoMotion.Movements.started -= GetMove;
-        inputActions.LocoMotion.Movements.performed -= GetMove;
-        inputActions.LocoMotion.Movements.canceled -= GetMove;
+        inputActions.Player.Movements.started -= GetMove;
+        inputActions.Player.Movements.performed -= GetMove;
+        inputActions.Player.Movements.canceled -= GetMove;
 
-        inputActions.LocoMotion.Sprint.started += Sprint;
-        inputActions.LocoMotion.Sprint.performed += Sprint;
-        inputActions.LocoMotion.Sprint.canceled += Sprint;
+        inputActions.Player.Sprint.started += Sprint;
+        inputActions.Player.Sprint.performed += Sprint;
+        inputActions.Player.Sprint.canceled += Sprint;
 
-        inputActions.LocoMotion.Mouse.started -= Mouse;
-        inputActions.LocoMotion.Mouse.performed -= Mouse;
-        inputActions.LocoMotion.Mouse.canceled -= Mouse;
+        inputActions.Player.Mouse.started -= Mouse;
+        inputActions.Player.Mouse.performed -= Mouse;
+        inputActions.Player.Mouse.canceled -= Mouse;
+
+        inputActions.Player.Interactions.started -= Interactions;
+        inputActions.Player.Interactions.performed -= Interactions;
+        inputActions.Player.Interactions.canceled -= Interactions;
     }
 }

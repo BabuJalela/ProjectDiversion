@@ -2,7 +2,7 @@
     "name": "GameInputs",
     "maps": [
         {
-            "name": "LocoMotion",
+            "name": "Player",
             "id": "56fe40d9-384c-4efd-86ec-c7698e62ab45",
             "actions": [
                 {
@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Interactions",
+                    "type": "Button",
+                    "id": "b3b2f3d0-4a85-4c4a-af00-60d8401d5e2a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -150,14 +159,19 @@
                     "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e66b2a2-9860-477b-ac92-7e66298d7a3a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interactions",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Interactions",
-            "id": "a62ce241-0a3c-4b1e-aacd-4621ad3663b6",
-            "actions": [],
-            "bindings": []
         }
     ],
     "controlSchemes": [

@@ -24,7 +24,7 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     ""name"": ""GameInputs"",
     ""maps"": [
         {
-            ""name"": ""LocoMotion"",
+            ""name"": ""Player"",
             ""id"": ""56fe40d9-384c-4efd-86ec-c7698e62ab45"",
             ""actions"": [
                 {
@@ -71,6 +71,15 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interactions"",
+                    ""type"": ""Button"",
+                    ""id"": ""b3b2f3d0-4a85-4c4a-af00-60d8401d5e2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,14 +181,19 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e66b2a2-9860-477b-ac92-7e66298d7a3a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interactions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Interactions"",
-            ""id"": ""a62ce241-0a3c-4b1e-aacd-4621ad3663b6"",
-            ""actions"": [],
-            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -201,15 +215,14 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // LocoMotion
-        m_LocoMotion = asset.FindActionMap("LocoMotion", throwIfNotFound: true);
-        m_LocoMotion_Movements = m_LocoMotion.FindAction("Movements", throwIfNotFound: true);
-        m_LocoMotion_Jump = m_LocoMotion.FindAction("Jump", throwIfNotFound: true);
-        m_LocoMotion_Crouch = m_LocoMotion.FindAction("Crouch", throwIfNotFound: true);
-        m_LocoMotion_Sprint = m_LocoMotion.FindAction("Sprint", throwIfNotFound: true);
-        m_LocoMotion_Mouse = m_LocoMotion.FindAction("Mouse", throwIfNotFound: true);
-        // Interactions
-        m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Movements = m_Player.FindAction("Movements", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
+        m_Player_Interactions = m_Player.FindAction("Interactions", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,49 +279,54 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // LocoMotion
-    private readonly InputActionMap m_LocoMotion;
-    private ILocoMotionActions m_LocoMotionActionsCallbackInterface;
-    private readonly InputAction m_LocoMotion_Movements;
-    private readonly InputAction m_LocoMotion_Jump;
-    private readonly InputAction m_LocoMotion_Crouch;
-    private readonly InputAction m_LocoMotion_Sprint;
-    private readonly InputAction m_LocoMotion_Mouse;
-    public struct LocoMotionActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Movements;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_Sprint;
+    private readonly InputAction m_Player_Mouse;
+    private readonly InputAction m_Player_Interactions;
+    public struct PlayerActions
     {
         private @GameInputs m_Wrapper;
-        public LocoMotionActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movements => m_Wrapper.m_LocoMotion_Movements;
-        public InputAction @Jump => m_Wrapper.m_LocoMotion_Jump;
-        public InputAction @Crouch => m_Wrapper.m_LocoMotion_Crouch;
-        public InputAction @Sprint => m_Wrapper.m_LocoMotion_Sprint;
-        public InputAction @Mouse => m_Wrapper.m_LocoMotion_Mouse;
-        public InputActionMap Get() { return m_Wrapper.m_LocoMotion; }
+        public PlayerActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movements => m_Wrapper.m_Player_Movements;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
+        public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
+        public InputAction @Interactions => m_Wrapper.m_Player_Interactions;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(LocoMotionActions set) { return set.Get(); }
-        public void SetCallbacks(ILocoMotionActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_LocoMotionActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Movements.started -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnMovements;
-                @Movements.performed -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnMovements;
-                @Movements.canceled -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnMovements;
-                @Jump.started -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnJump;
-                @Crouch.started -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnCrouch;
-                @Crouch.performed -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnCrouch;
-                @Crouch.canceled -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnCrouch;
-                @Sprint.started -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnSprint;
-                @Mouse.started -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnMouse;
-                @Mouse.performed -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnMouse;
-                @Mouse.canceled -= m_Wrapper.m_LocoMotionActionsCallbackInterface.OnMouse;
+                @Movements.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovements;
+                @Movements.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovements;
+                @Movements.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovements;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Mouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
+                @Mouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
+                @Mouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
+                @Interactions.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractions;
+                @Interactions.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractions;
+                @Interactions.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractions;
             }
-            m_Wrapper.m_LocoMotionActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movements.started += instance.OnMovements;
@@ -326,35 +344,13 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @Mouse.started += instance.OnMouse;
                 @Mouse.performed += instance.OnMouse;
                 @Mouse.canceled += instance.OnMouse;
+                @Interactions.started += instance.OnInteractions;
+                @Interactions.performed += instance.OnInteractions;
+                @Interactions.canceled += instance.OnInteractions;
             }
         }
     }
-    public LocoMotionActions @LocoMotion => new LocoMotionActions(this);
-
-    // Interactions
-    private readonly InputActionMap m_Interactions;
-    private IInteractionsActions m_InteractionsActionsCallbackInterface;
-    public struct InteractionsActions
-    {
-        private @GameInputs m_Wrapper;
-        public InteractionsActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
-        public InputActionMap Get() { return m_Wrapper.m_Interactions; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InteractionsActions set) { return set.Get(); }
-        public void SetCallbacks(IInteractionsActions instance)
-        {
-            if (m_Wrapper.m_InteractionsActionsCallbackInterface != null)
-            {
-            }
-            m_Wrapper.m_InteractionsActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-            }
-        }
-    }
-    public InteractionsActions @Interactions => new InteractionsActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
@@ -364,15 +360,13 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardAndMouseSchemeIndex];
         }
     }
-    public interface ILocoMotionActions
+    public interface IPlayerActions
     {
         void OnMovements(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
-    }
-    public interface IInteractionsActions
-    {
+        void OnInteractions(InputAction.CallbackContext context);
     }
 }

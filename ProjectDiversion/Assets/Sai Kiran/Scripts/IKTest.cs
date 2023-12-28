@@ -26,9 +26,9 @@ public class IKTest : MonoBehaviour
 
             if (objectToHold != null)
             {
-                if (Input.GetKey(KeyCode.E)) //
+                if (Input.GetKey(KeyCode.Q)) //
                 {
-                    playerRightHand.transform.Rotate(new Vector3(-90, 0, 0));
+                    //playerRightHand.transform.Rotate(new Vector3(-90, 0, 0));
 
                     positionweight += Time.deltaTime;
                     positionweight = Mathf.Clamp(positionweight, 0f, 1f);
@@ -41,7 +41,7 @@ public class IKTest : MonoBehaviour
                 }
                 else
                 {
-                    playerRightHand.transform.Rotate(new Vector3(0, 0, 0));
+                    //playerRightHand.transform.Rotate(new Vector3(0, 0, 0));
 
                     rotationweight -= Time.deltaTime;
                     rotationweight = Mathf.Clamp(rotationweight, 0f, 1f);
