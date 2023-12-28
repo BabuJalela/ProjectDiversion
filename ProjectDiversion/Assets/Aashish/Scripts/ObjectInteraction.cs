@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    public float interactionRange = 3f; 
+    public float interactionRadius = 3f; 
     public LayerMask interactableLayer; 
 
-    private Transform carriedObject;
+    private Transform carriedObject; 
 
     void Update()
     {
@@ -24,15 +24,17 @@ public class ObjectInteraction : MonoBehaviour
 
     void TryPickUpObject()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactionRange, interactableLayer))
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius, interactableLayer);
+        foreach (Collider collider in colliders)
         {
-            InteractableObject interactable = hit.collider.GetComponent<InteractableObject>();
+            InteractableObject interactable = collider.GetComponent<InteractableObject>();
             if (interactable != null)
             {
                 carriedObject = interactable.PickUp(transform);
 
                 interactable.OnPickUp();
+
+                break;
             }
         }
     }
