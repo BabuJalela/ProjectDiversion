@@ -595,7 +595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019431370262958181}
-  m_LocalRotation: {x: 0.3511357, y: 0.11628362, z: -0.043997694, w: 0.9280335}
+  m_LocalRotation: {x: 0.011392367, y: 0.18728602, z: -0.002172216, w: 0.982237}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -800,7 +800,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2391563722107645591}
-  m_LocalRotation: {x: 0.3511357, y: 0.11628362, z: -0.043997694, w: 0.9280335}
+  m_LocalRotation: {x: 0.011392343, y: 0.187286, z: -0.0021722114, w: 0.982237}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -965,6 +965,8 @@ GameObject:
   - component: {fileID: 6710987203126054201}
   - component: {fileID: 2400762284862128345}
   - component: {fileID: 5154403563698421750}
+  - component: {fileID: 1873584231}
+  - component: {fileID: 1873584232}
   m_Layer: 0
   m_Name: ThirdPersonCamera
   m_TagString: Untagged
@@ -980,7 +982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3134680654168337196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.012356758, y: 2.5, z: -1.1999359}
+  m_LocalPosition: {x: -0.012356758, y: 1.5, z: -1.1999359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1029,7 +1031,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 1
     m_AccelTime: 0.2
@@ -1110,6 +1112,52 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: 5303315942637991464, guid: 5b0eee25adf34004a8760158265c3bc6, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &1873584231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134680654168337196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1975
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.01
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.7
+  m_Strategy: 0
+  m_MaximumEffort: 1
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
+--- !u!114 &1873584232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134680654168337196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 1
+  m_Damping: 1
+  m_MinFOV: 1
+  m_MaxFOV: 60
 --- !u!1 &3238960740036775841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,7 +1214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3407511718806540159}
-  m_LocalRotation: {x: 0.3511357, y: 0.116283625, z: -0.043997694, w: 0.9280335}
+  m_LocalRotation: {x: 0.011392367, y: 0.18728602, z: -0.002172216, w: 0.982237}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1694,7 +1742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 2.5, z: -1.2}
+  m_FollowOffset: {x: 0, y: 1.5, z: -1.2}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -2154,7 +2202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 2.5, z: -1.2}
+  m_FollowOffset: {x: 0, y: 1.5, z: -1.2}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -2725,7 +2773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 2.5, z: -1.2}
+  m_FollowOffset: {x: 0, y: 1.5, z: -1.2}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
