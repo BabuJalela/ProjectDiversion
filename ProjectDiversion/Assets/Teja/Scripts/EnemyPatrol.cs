@@ -89,11 +89,19 @@ public class EnemyPatrol : MonoBehaviour
             navMeshAgent.isStopped = false;
         }
         // just for testing
-        Destroy(playerPrefab, 2f);
+        //Destroy(playerPrefab, 2f);
 
     }
-    
-   
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            Debug.Log("You cauht again");
+           // Destroy(playerPrefab, 2f);
+        }
+    }
+
 }
 
  
