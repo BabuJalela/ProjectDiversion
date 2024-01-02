@@ -3,28 +3,27 @@ using UnityEngine.InputSystem;
 
 public class Movements : MonoBehaviour
 {
-    public GameInputs inputActions;
-    public CharacterController characterController;
-    public Animator animator;
-    public Camera mainCamera;
-    public float transitionMultiplier = 10f;
+    [SerializeField] private GameInputs inputActions;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private float transitionMultiplier = 10f;
 
     private Vector3 playerMove;
     private bool playerSprint;
     private Vector2 mouseDelta;
-    private bool playerInteract;
+    private bool playerCrouch;
     private Vector3 moveDirection;
-    public float moveSpeed;
-    public float sprintSpeed;
-    //public float gravity = 9.8f;
-    /*private float velocityX = 0.0f;
-    private float velocityZ = 0.0f;*/
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float sprintSpeed;
     private int velocityXHash;
     private int velocityZHash;
 
+    [SerializeField] private bool inWater;
+
     // IK
-    public Transform rightToHold;
-    public Transform leftToHold;
+    [SerializeField] private Transform rightToHold;
+    [SerializeField] private Transform leftToHold;
     float positionweight = 0f;
 
     private void OnEnable()
@@ -36,43 +35,44 @@ public class Movements : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         inputActions = new GameInputs();
         inputActions.Enable();
-        inputActions.Player.Movements.started += GetMove;
-        inputActions.Player.Movements.performed += GetMove;
-        inputActions.Player.Movements.canceled += GetMove;
+        inputActions.Player.Movements.started += MoveValues;
+        inputActions.Player.Movements.performed += MoveValues;
+        inputActions.Player.Movements.canceled += MoveValues;
 
-        inputActions.Player.Sprint.started += Sprint;
-        inputActions.Player.Sprint.performed += Sprint;
-        inputActions.Player.Sprint.canceled += Sprint;
+        inputActions.Player.Sprint.started += SprintValue;
+        inputActions.Player.Sprint.performed += SprintValue;
+        inputActions.Player.Sprint.canceled += SprintValue;
 
-        inputActions.Player.Mouse.started += Mouse;
-        inputActions.Player.Mouse.performed += Mouse;
-        inputActions.Player.Mouse.canceled += Mouse;
+        inputActions.Player.Mouse.started += MouseValues;
+        inputActions.Player.Mouse.performed += MouseValues;
+        inputActions.Player.Mouse.canceled += MouseValues;
 
-        inputActions.Player.Interactions.started += Interactions;
-        inputActions.Player.Interactions.performed += Interactions;
-        inputActions.Player.Interactions.canceled += Interactions;
+        inputActions.Interactions.Crouch.started += CrouchValues;
+        inputActions.Interactions.Crouch.performed += CrouchValues;
+        inputActions.Interactions.Crouch.canceled += CrouchValues;
     }
 
 
-    private void GetMove(InputAction.CallbackContext context)
+    private void MoveValues(InputAction.CallbackContext context)
     {
         playerMove.x = context.ReadValue<Vector2>().x;
         playerMove.z = context.ReadValue<Vector2>().y;
     }
-    private void Sprint(InputAction.CallbackContext context)
-    {
-        playerSprint = context.ReadValueAsButton();
-    }
 
-    private void Mouse(InputAction.CallbackContext context)
+    private void MouseValues(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
-    private void Interactions(InputAction.CallbackContext context)
+    private void SprintValue(InputAction.CallbackContext context)
     {
-        playerInteract = context.ReadValueAsButton();
+        playerSprint = context.ReadValueAsButton();
+    }
+    private void CrouchValues(InputAction.CallbackContext context)
+    {
+        playerCrouch = context.ReadValueAsButton();
     }
 
     private void Update()
@@ -82,20 +82,24 @@ public class Movements : MonoBehaviour
     }
     private void Move()
     {
-        Debug.Log(playerMove);
+        //Debug.Log(playerMove);
 
         moveDirection = transform.TransformVector(playerMove);
         if (playerSprint)
         {
-            characterController.SimpleMove(sprintSpeed * moveDirection);
+            characterController.Move(sprintSpeed * Time.deltaTime * moveDirection);
         }
         else
         {
-            characterController.SimpleMove(moveSpeed * moveDirection);
+            characterController.Move(moveSpeed * Time.deltaTime * moveDirection);
         }
     }
 
-    private void OnAnimatorIK()
+    private void Crouch()
+    {
+
+    }
+    /*private void OnAnimatorIK()
     {
         if (animator)
         {
@@ -121,7 +125,7 @@ public class Movements : MonoBehaviour
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, positionweight);
             }
         }
-    }
+    }*/
 
     private void animations()
     {
@@ -134,6 +138,27 @@ public class Movements : MonoBehaviour
 
         animator.SetFloat("VelocityX", result.x);
         animator.SetFloat("VelocityZ", result.y);
+
+        if (playerCrouch && !inWater)
+        {
+            animator.SetBool("Crouch", true);
+            animator.SetFloat("VelocityX", playerMove.x);
+            animator.SetFloat("VelocityZ", playerMove.z);
+        }
+        else
+        {
+            animator.SetBool("Crouch", false);
+        }
+        if (inWater)
+        {
+            animator.SetBool("InWater", true);
+            animator.SetFloat("VelocityX", result.x);
+            animator.SetFloat("VelocityZ", result.y);
+        }
+        else
+        {
+            animator.SetBool("InWater", false);
+        }
     }
 
     private void LateUpdate()
@@ -144,20 +169,20 @@ public class Movements : MonoBehaviour
     private void OnDisable()
     {
         inputActions.Disable();
-        inputActions.Player.Movements.started -= GetMove;
-        inputActions.Player.Movements.performed -= GetMove;
-        inputActions.Player.Movements.canceled -= GetMove;
+        inputActions.Player.Movements.started -= MoveValues;
+        inputActions.Player.Movements.performed -= MoveValues;
+        inputActions.Player.Movements.canceled -= MoveValues;
 
-        inputActions.Player.Sprint.started += Sprint;
-        inputActions.Player.Sprint.performed += Sprint;
-        inputActions.Player.Sprint.canceled += Sprint;
+        inputActions.Player.Sprint.started += SprintValue;
+        inputActions.Player.Sprint.performed += SprintValue;
+        inputActions.Player.Sprint.canceled += SprintValue;
 
-        inputActions.Player.Mouse.started -= Mouse;
-        inputActions.Player.Mouse.performed -= Mouse;
-        inputActions.Player.Mouse.canceled -= Mouse;
+        inputActions.Player.Mouse.started -= MouseValues;
+        inputActions.Player.Mouse.performed -= MouseValues;
+        inputActions.Player.Mouse.canceled -= MouseValues;
 
-        inputActions.Player.Interactions.started -= Interactions;
-        inputActions.Player.Interactions.performed -= Interactions;
-        inputActions.Player.Interactions.canceled -= Interactions;
+        inputActions.Interactions.Crouch.started += CrouchValues;
+        inputActions.Interactions.Crouch.performed += CrouchValues;
+        inputActions.Interactions.Crouch.canceled += CrouchValues;
     }
 }

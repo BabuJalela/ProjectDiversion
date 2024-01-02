@@ -71,15 +71,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Interactions"",
-                    ""type"": ""Button"",
-                    ""id"": ""b3b2f3d0-4a85-4c4a-af00-60d8401d5e2a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -181,15 +172,52 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interactions"",
+            ""id"": ""cca379d4-7151-41d9-b29d-2c0670e8be58"",
+            ""actions"": [
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""595ba397-4cd0-4e97-8878-08926bd429d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact "",
+                    ""type"": ""Button"",
+                    ""id"": ""2a5a99c0-6d17-4bbe-9753-e849a9e95fa1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d5f698b0-9762-45c7-8425-6e9890ca568a"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4e66b2a2-9860-477b-ac92-7e66298d7a3a"",
+                    ""id"": ""830813f0-5c84-4b2a-b052-bdc69baddf9f"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interactions"",
+                    ""action"": ""Interact "",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -222,7 +250,10 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
-        m_Player_Interactions = m_Player.FindAction("Interactions", throwIfNotFound: true);
+        // Interactions
+        m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
+        m_Interactions_Crouch = m_Interactions.FindAction("Crouch", throwIfNotFound: true);
+        m_Interactions_Interact = m_Interactions.FindAction("Interact ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -287,7 +318,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Mouse;
-    private readonly InputAction m_Player_Interactions;
     public struct PlayerActions
     {
         private @GameInputs m_Wrapper;
@@ -297,7 +327,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
-        public InputAction @Interactions => m_Wrapper.m_Player_Interactions;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -322,9 +351,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @Mouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
                 @Mouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
                 @Mouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
-                @Interactions.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractions;
-                @Interactions.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractions;
-                @Interactions.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteractions;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -344,13 +370,51 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 @Mouse.started += instance.OnMouse;
                 @Mouse.performed += instance.OnMouse;
                 @Mouse.canceled += instance.OnMouse;
-                @Interactions.started += instance.OnInteractions;
-                @Interactions.performed += instance.OnInteractions;
-                @Interactions.canceled += instance.OnInteractions;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Interactions
+    private readonly InputActionMap m_Interactions;
+    private IInteractionsActions m_InteractionsActionsCallbackInterface;
+    private readonly InputAction m_Interactions_Crouch;
+    private readonly InputAction m_Interactions_Interact;
+    public struct InteractionsActions
+    {
+        private @GameInputs m_Wrapper;
+        public InteractionsActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Crouch => m_Wrapper.m_Interactions_Crouch;
+        public InputAction @Interact => m_Wrapper.m_Interactions_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Interactions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionsActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionsActions instance)
+        {
+            if (m_Wrapper.m_InteractionsActionsCallbackInterface != null)
+            {
+                @Crouch.started -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnCrouch;
+                @Interact.started -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_InteractionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public InteractionsActions @Interactions => new InteractionsActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
@@ -367,6 +431,10 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
-        void OnInteractions(InputAction.CallbackContext context);
+    }
+    public interface IInteractionsActions
+    {
+        void OnCrouch(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
