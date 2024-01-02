@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Water
   - Collectables
+  - Crate
+  - Cuboard
   layers:
   - Default
   - TransparentFX

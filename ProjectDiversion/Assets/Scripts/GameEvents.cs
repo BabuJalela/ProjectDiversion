@@ -56,3 +56,8 @@ public class GeneratorMalfunctionEvent : GameEvent
 {
 
 }
+
+public class DoorBlockEvent : GameEvent
+{
+
+}

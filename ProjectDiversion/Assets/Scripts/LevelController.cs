@@ -12,11 +12,13 @@ public class LevelController : IController
     public void RegisterListener()
     {
         GameEventManager.Instance.AddListener<LeverPullEvent>(OnLeverPull);
+        GameEventManager.Instance.AddListener<DoorBlockEvent>(OnDoorBlock);
     }
 
     public void UnRegisterListener()
     {
         GameEventManager.Instance.RemoveListener<LeverPullEvent>(OnLeverPull);
+        GameEventManager.Instance.RemoveListener<DoorBlockEvent>(OnDoorBlock);
 
     }
 
@@ -35,6 +37,11 @@ public class LevelController : IController
     private void OnLeverPull(LeverPullEvent e)
     {
         level2Manager.OnLeverPull(e.canFill);
+    }
+
+    private void OnDoorBlock(DoorBlockEvent e)
+    {
+        level2Manager.isDoorBlocked = true;
     }
 
     #endregion

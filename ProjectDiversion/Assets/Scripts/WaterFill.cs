@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WaterFill : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.05f;
+    [SerializeField] private float speed = 0.01f;
     [SerializeField] private bool isFill = false;
     // Start is called before the first frame update
 

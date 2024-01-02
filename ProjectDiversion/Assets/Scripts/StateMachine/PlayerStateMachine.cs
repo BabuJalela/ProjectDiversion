@@ -13,8 +13,9 @@ public class PlayerStateMachine : BaseStateMachine, IController
         {
             { StateIDs.IDLESTATE, new PlayerIdleState(playerData) },
             { StateIDs.RUNSTATE, new PlayerRunState(playerData)},
-            { StateIDs.LEVERSTATE, new LeverState(levelData) }
-        };
+            { StateIDs.LEVERSTATE, new LeverState(levelData) },
+            { StateIDs.PUSHSTATE, new PushState()}
+    };
     }
     public void Initialize()
     {

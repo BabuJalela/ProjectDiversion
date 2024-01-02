@@ -4,6 +4,7 @@ using UnityEngine;
 public class Level2Manager
 {
     private bool isGeneratorActive = true;
+    public bool isDoorBlocked = false;
     public void OnStart()
     {
 
@@ -36,10 +37,19 @@ public class Level2Manager
 
     private void GeneratorMalfunction()
     {
-        if (SpawnObjectAddressables.GetLevelDatathroughID("Water").transform.position.y > SpawnObjectAddressables.GetLevelDatathroughID("Generator").transform.position.y && isGeneratorActive)
+        if (SpawnObjectAddressables.GetLevelDatathroughID("Water").transform.position.y > SpawnObjectAddressables.GetLevelDatathroughID("Generator").transform.position.y && isGeneratorActive && !isDoorBlocked)
         {
             GameEventManager.Instance.TriggerEvent(new LeverPullEvent(false));
             isGeneratorActive = false;
+        }
+    }
+
+    private void ReduceCuboardWeightToMove()
+    {
+        StoredObjects storedObjects = SpawnObjectAddressables.GetLevelDatathroughID("Cuboard").GetComponentInChildren<StoredObjects>();
+        if (storedObjects != null)
+        {
+
         }
     }
 
