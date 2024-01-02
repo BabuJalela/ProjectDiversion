@@ -3,3 +3,7 @@ added outliner effect to the objects
 created a script it will add every object material when it hit a ray..
 we need to convert and intigrate into the picables script and test
 creat a end for the level.
+
+02-01-2024
+created a cave enterence 
+created a script to turn valve on and off need to make changes in the script 
