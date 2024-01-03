@@ -10,6 +10,7 @@ TagManager:
   - Collectables
   - Crate
   - Cuboard
+  - ObjCam
   layers:
   - Default
   - TransparentFX

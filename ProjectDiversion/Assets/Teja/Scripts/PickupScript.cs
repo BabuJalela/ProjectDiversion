@@ -19,7 +19,7 @@ public class PickupScript : MonoBehaviour
             if (pickables == null)
             {
 
-                float pickupidis = 2f;
+                float pickupidis = 10f;
 
                 if (Physics.Raycast(playercameratransform.transform.position, playercameratransform.forward, out RaycastHit raycasthit, pickupidis, pickuplayermasl))
                 {

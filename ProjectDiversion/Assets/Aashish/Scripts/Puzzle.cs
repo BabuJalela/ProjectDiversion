@@ -1,21 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Puzzle : MonoBehaviour
 {
-    public RotateOnSpace rt;
+    public DoorRotation rt;
 
     public Transform targetObject;
     public Transform referenceObject;
 
     public float rotationSpeed = 100f;
     public float threshold = 0.970f;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
