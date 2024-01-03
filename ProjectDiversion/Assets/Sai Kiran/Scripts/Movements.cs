@@ -10,31 +10,28 @@ public class Movements : MonoBehaviour
     [SerializeField] private float transitionMultiplier = 10f;
 
     private Vector3 playerMove;
-    private bool playerSprint;
-    private Vector2 mouseDelta;
-    private bool playerCrouch;
     private Vector3 moveDirection;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float sprintSpeed;
-    private int velocityXHash;
-    private int velocityZHash;
-
+    private bool playerSprint;
+    //private Vector2 mouseDelta;
+    private bool playerCrouch;
+    private bool playerCrouchBool;
     [SerializeField] private bool inWater;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
 
-    // IK
-    [SerializeField] private Transform rightToHold;
-    [SerializeField] private Transform leftToHold;
-    float positionweight = 0f;
+    /* // IK
+     [SerializeField] private Transform rightToHold;
+     [SerializeField] private Transform leftToHold;
+     float positionweight = 0f;*/
 
     private void OnEnable()
     {
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
-        velocityXHash = Animator.StringToHash("VelocityX");
-        velocityZHash = Animator.StringToHash("VelocityZ");
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerCrouch = false;
 
         inputActions = new GameInputs();
         inputActions.Enable();
@@ -45,10 +42,6 @@ public class Movements : MonoBehaviour
         inputActions.Player.Sprint.started += SprintValue;
         inputActions.Player.Sprint.performed += SprintValue;
         inputActions.Player.Sprint.canceled += SprintValue;
-
-        inputActions.Player.Mouse.started += MouseValues;
-        inputActions.Player.Mouse.performed += MouseValues;
-        inputActions.Player.Mouse.canceled += MouseValues;
 
         inputActions.Interactions.Crouch.started += CrouchValues;
         inputActions.Interactions.Crouch.performed += CrouchValues;
@@ -62,10 +55,6 @@ public class Movements : MonoBehaviour
         playerMove.z = context.ReadValue<Vector2>().y;
     }
 
-    private void MouseValues(InputAction.CallbackContext context)
-    {
-        mouseDelta = context.ReadValue<Vector2>();
-    }
     private void SprintValue(InputAction.CallbackContext context)
     {
         playerSprint = context.ReadValueAsButton();
@@ -73,6 +62,9 @@ public class Movements : MonoBehaviour
     private void CrouchValues(InputAction.CallbackContext context)
     {
         playerCrouch = context.ReadValueAsButton();
+
+        /*if (playerCrouch)
+            playerCrouchBool ? (playerCrouchBool = false) : (playerCrouchBool = true);*/
     }
 
     private void Update()
@@ -83,22 +75,23 @@ public class Movements : MonoBehaviour
     private void Move()
     {
         //Debug.Log(playerMove);
+        float applyWalkSpeed;
+        float applySprintSpeed;
+        playerMove.y = inWater ? 0.00f : -9.81f;
+        applyWalkSpeed = (inWater && playerCrouch) ? walkSpeed / 2 : walkSpeed;
+        applySprintSpeed = (inWater && playerCrouch) ? sprintSpeed / 2 : sprintSpeed;
 
         moveDirection = transform.TransformVector(playerMove);
         if (playerSprint)
         {
-            characterController.Move(sprintSpeed * Time.deltaTime * moveDirection);
+            characterController.Move(applySprintSpeed * Time.deltaTime * moveDirection);
         }
         else
         {
-            characterController.Move(moveSpeed * Time.deltaTime * moveDirection);
+            characterController.Move(applyWalkSpeed * Time.deltaTime * moveDirection);
         }
     }
 
-    private void Crouch()
-    {
-
-    }
     /*private void OnAnimatorIK()
     {
         if (animator)
@@ -176,10 +169,6 @@ public class Movements : MonoBehaviour
         inputActions.Player.Sprint.started += SprintValue;
         inputActions.Player.Sprint.performed += SprintValue;
         inputActions.Player.Sprint.canceled += SprintValue;
-
-        inputActions.Player.Mouse.started -= MouseValues;
-        inputActions.Player.Mouse.performed -= MouseValues;
-        inputActions.Player.Mouse.canceled -= MouseValues;
 
         inputActions.Interactions.Crouch.started += CrouchValues;
         inputActions.Interactions.Crouch.performed += CrouchValues;
