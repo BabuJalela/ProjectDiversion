@@ -3,7 +3,7 @@ using UnityEngine;
 public class RotateOnSpace : MonoBehaviour
 {
     private float initialRotationX = 0f;
-    private float initialRotationY = 0f;
+    public float initialRotationY = 0f;
     private float initialRotationZ = 0f;
 
     private Quaternion targetRotation;

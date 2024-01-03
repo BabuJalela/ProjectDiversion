@@ -1406,7 +1406,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   transitionMultiplier: 10
   inWater: 0
-  walkSpeed: 0
+  walkSpeed: 2
   sprintSpeed: 5
 --- !u!114 &64749159
 MonoBehaviour:

@@ -21,6 +21,7 @@ public class Picables : MonoBehaviour
         this.objectgrabpointtransform = objectgrabpointtransform;
        
         rb.useGravity = false;
+        rb.isKinematic = true;
     }
 
     public void drop()
@@ -28,6 +29,7 @@ public class Picables : MonoBehaviour
         this.objectgrabpointtransform = null;
        
         rb.useGravity = true; 
+        rb.isKinematic = false;
     }
 
     private void FixedUpdate()

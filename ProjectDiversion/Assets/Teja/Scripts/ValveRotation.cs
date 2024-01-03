@@ -4,6 +4,8 @@ public class ValveRotation : MonoBehaviour
 {
     public float raotationSpeed = 10f;
     private bool IsvalveOpened = false;
+    public GameObject player;
+    public GameObject VR;
     
 
     void Update()
@@ -21,6 +23,8 @@ public class ValveRotation : MonoBehaviour
             if (IsvalveOpened)
             {
                 Debug.Log("Valve opened");
+                VR.SetActive(false);
+                player.SetActive(true);
             }
         }
     }
