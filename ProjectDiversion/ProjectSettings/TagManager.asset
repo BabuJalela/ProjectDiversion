@@ -11,6 +11,8 @@ TagManager:
   - Crate
   - Cuboard
   - ObjCam
+  - Bird
+  - FakeBird
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,15 @@ public class Puzzle : MonoBehaviour
     public float rotationSpeed = 100f;
     public float threshold = 0.970f;
 
+    [SerializeField] private GameObject PlayerCam;
+    [SerializeField] private GameObject ObjCam;
+
     void Update()
+    {
+        puzzleControls();
+    }
+
+    public void puzzleControls()
     {
         float mouseX = Input.GetAxisRaw("Mouse X");
         float mouseY = Input.GetAxisRaw("Mouse Y");
@@ -23,11 +31,13 @@ public class Puzzle : MonoBehaviour
         float dotUp = Vector3.Dot(transform.up, targetObject.up);
         float dotRight = Vector3.Dot(transform.right, targetObject.right);
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if(dotRight >= threshold && dotUp >= threshold) 
+            if (dotRight >= threshold && dotUp >= threshold)
             {
                 rt.yesRotate();
+                PlayerCam.SetActive(true);
+                ObjCam.SetActive(false);
             }
             else
             {
