@@ -25,15 +25,12 @@ public class FPS : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
         normalCharacterControllerHeight = characterController.height;
-       
     }
 
     void Update()
     {
-
         PlayerMovement();
         HadelCrouchInput();
-
     }
 
     void HadelCrouchInput()
