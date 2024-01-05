@@ -7,17 +7,20 @@ public class Movements : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Animator animator;
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private float transitionMultiplier = 10f;
+    [SerializeField] private float animationTransitionMultiplier = 10f;
 
     private Vector3 playerMove;
     private Vector3 moveDirection;
     private bool playerSprint;
-    //private Vector2 mouseDelta;
     private bool playerCrouch;
-    private bool playerCrouchBool;
-    [SerializeField] private bool inWater;
+    private bool playerJump;
+    [SerializeField] private float jumpHeight;
+    private float jumpVelocity;
+    public bool inWater;
+    public bool stopPlayerMove;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
+    private float playerGravity = -9.81f;
 
     /* // IK
      [SerializeField] private Transform rightToHold;
@@ -35,36 +38,40 @@ public class Movements : MonoBehaviour
 
         inputActions = new GameInputs();
         inputActions.Enable();
-        inputActions.Player.Movements.started += MoveValues;
-        inputActions.Player.Movements.performed += MoveValues;
-        inputActions.Player.Movements.canceled += MoveValues;
+        inputActions.Player.Movements.started += GetMoveValues;
+        inputActions.Player.Movements.performed += GetMoveValues;
+        inputActions.Player.Movements.canceled += GetMoveValues;
 
-        inputActions.Player.Sprint.started += SprintValue;
-        inputActions.Player.Sprint.performed += SprintValue;
-        inputActions.Player.Sprint.canceled += SprintValue;
+        inputActions.Player.Sprint.started += GetSprintValue;
+        inputActions.Player.Sprint.performed += GetSprintValue;
+        inputActions.Player.Sprint.canceled += GetSprintValue;
 
-        inputActions.Interactions.Crouch.started += CrouchValues;
-        inputActions.Interactions.Crouch.performed += CrouchValues;
-        inputActions.Interactions.Crouch.canceled += CrouchValues;
+        inputActions.Player.Jump.started += GetJumpValue;
+        inputActions.Player.Jump.performed += GetJumpValue;
+        inputActions.Player.Jump.canceled += GetJumpValue;
+
+        inputActions.Interactions.Crouch.started += GetCrouchValues;
+        inputActions.Interactions.Crouch.performed += GetCrouchValues;
+        inputActions.Interactions.Crouch.canceled += GetCrouchValues;
     }
 
-
-    private void MoveValues(InputAction.CallbackContext context)
+    private void GetMoveValues(InputAction.CallbackContext context)
     {
         playerMove.x = context.ReadValue<Vector2>().x;
         playerMove.z = context.ReadValue<Vector2>().y;
     }
-
-    private void SprintValue(InputAction.CallbackContext context)
+    private void GetSprintValue(InputAction.CallbackContext context)
     {
         playerSprint = context.ReadValueAsButton();
     }
-    private void CrouchValues(InputAction.CallbackContext context)
+    private void GetJumpValue(InputAction.CallbackContext context)
+    {
+        playerJump = context.ReadValueAsButton();
+        //JumpLogic(playerJump);
+    }
+    private void GetCrouchValues(InputAction.CallbackContext context)
     {
         playerCrouch = context.ReadValueAsButton();
-
-        /*if (playerCrouch)
-            playerCrouchBool ? (playerCrouchBool = false) : (playerCrouchBool = true);*/
     }
 
     private void Update()
@@ -74,12 +81,32 @@ public class Movements : MonoBehaviour
     }
     private void Move()
     {
+        if (stopPlayerMove)
+        {
+            playerMove.x = 0;
+            playerMove.z = 0;
+        }
+        if (playerJump && characterController.isGrounded)
+        {
+            jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * playerGravity);
+        }
+        jumpVelocity += playerGravity * Time.deltaTime;
+        /*else
+        {
+            playerGravity -= Time.deltaTime * 2f;
+            playerGravity = Mathf.Clamp(playerGravity, 0f, -9.81f);
+        }*/
         //Debug.Log(playerMove);
         float applyWalkSpeed;
         float applySprintSpeed;
-        playerMove.y = inWater ? 0.00f : -9.81f;
-        applyWalkSpeed = (inWater && playerCrouch) ? walkSpeed / 2 : walkSpeed;
-        applySprintSpeed = (inWater && playerCrouch) ? sprintSpeed / 2 : sprintSpeed;
+
+        playerMove.y = inWater ? 0f : playerGravity;// player not floating
+        playerMove.y = playerJump ? jumpVelocity : playerGravity;
+
+        applyWalkSpeed = (inWater || playerCrouch) ? walkSpeed / 2 : walkSpeed;
+        applySprintSpeed = (inWater || playerCrouch) ? sprintSpeed / 2 : sprintSpeed;
+
+        //Debug.Log($"applywalk : {applyWalkSpeed}, applysprint : {applySprintSpeed}");
 
         moveDirection = transform.TransformVector(playerMove);
         if (playerSprint)
@@ -91,6 +118,10 @@ public class Movements : MonoBehaviour
             characterController.Move(applyWalkSpeed * Time.deltaTime * moveDirection);
         }
     }
+    /*private void JumpLogic(bool _playerJump)
+    {
+
+    }*/
 
     /*private void OnAnimatorIK()
     {
@@ -127,7 +158,7 @@ public class Movements : MonoBehaviour
 
         Vector2 currentValue = new Vector2(animator.GetFloat("VelocityX"), animator.GetFloat("VelocityZ"));
 
-        Vector2 result = Vector2.Lerp(currentValue, intended, transitionMultiplier * Time.deltaTime);
+        Vector2 result = Vector2.Lerp(currentValue, intended, animationTransitionMultiplier * Time.deltaTime);
 
         animator.SetFloat("VelocityX", result.x);
         animator.SetFloat("VelocityZ", result.y);
@@ -152,6 +183,15 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("InWater", false);
         }
+        if (playerJump)
+        {
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+        }
+
     }
 
     private void LateUpdate()
@@ -162,16 +202,20 @@ public class Movements : MonoBehaviour
     private void OnDisable()
     {
         inputActions.Disable();
-        inputActions.Player.Movements.started -= MoveValues;
-        inputActions.Player.Movements.performed -= MoveValues;
-        inputActions.Player.Movements.canceled -= MoveValues;
+        inputActions.Player.Movements.started -= GetMoveValues;
+        inputActions.Player.Movements.performed -= GetMoveValues;
+        inputActions.Player.Movements.canceled -= GetMoveValues;
 
-        inputActions.Player.Sprint.started += SprintValue;
-        inputActions.Player.Sprint.performed += SprintValue;
-        inputActions.Player.Sprint.canceled += SprintValue;
+        inputActions.Player.Sprint.started -= GetSprintValue;
+        inputActions.Player.Sprint.performed -= GetSprintValue;
+        inputActions.Player.Sprint.canceled -= GetSprintValue;
 
-        inputActions.Interactions.Crouch.started += CrouchValues;
-        inputActions.Interactions.Crouch.performed += CrouchValues;
-        inputActions.Interactions.Crouch.canceled += CrouchValues;
+        inputActions.Player.Jump.started -= GetJumpValue;
+        inputActions.Player.Jump.performed -= GetJumpValue;
+        inputActions.Player.Jump.canceled -= GetJumpValue;
+
+        inputActions.Interactions.Crouch.started -= GetCrouchValues;
+        inputActions.Interactions.Crouch.performed -= GetCrouchValues;
+        inputActions.Interactions.Crouch.canceled -= GetCrouchValues;
     }
 }
