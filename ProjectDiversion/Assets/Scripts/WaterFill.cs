@@ -1,10 +1,12 @@
 using Events;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class WaterFill : MonoBehaviour
 {
     [SerializeField] private float speed = 0.01f;
     [SerializeField] private bool isFill = false;
+     public bool isValveOpen = false;
     // Start is called before the first frame update
 
     private void OnEnable()
@@ -24,6 +26,11 @@ public class WaterFill : MonoBehaviour
             transform.Translate(Vector3.up * speed * Time.deltaTime);
         }
 
+        if (isValveOpen == true) 
+        {
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        }
+
     }
 
     private void OnLeverPull(LeverPullEvent e)
@@ -36,3 +43,4 @@ public class WaterFill : MonoBehaviour
         GameEventManager.Instance.AddListener<LeverPullEvent>(OnLeverPull);
     }
 }
+

@@ -4,15 +4,17 @@ public class ValveRotation : MonoBehaviour
 {
     public float raotationSpeed = 10f;
     private bool IsvalveOpened = false;
+    public Camera valvecam;
     public GameObject player;
     public GameObject VR;
+    public WaterFill waterfill;
     
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = valvecam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
@@ -36,6 +38,7 @@ public class ValveRotation : MonoBehaviour
         if (transform.rotation.eulerAngles.y >= 90f)
         {
             IsvalveOpened=true;
+            waterfill.isValveOpen = true;
         }
 
     }

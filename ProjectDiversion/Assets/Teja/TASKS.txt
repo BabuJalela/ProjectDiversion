@@ -7,3 +7,10 @@ creat a end for the level.
 02-01-2024
 created a cave enterence 
 created a script to turn valve on and off need to make changes in the script 
+
+TO DO List 05-1-2024
+* Complete well water physics.
+* Create a villae setup
+* Learn json stuff
+* Add people and dialouges
+* polish level
