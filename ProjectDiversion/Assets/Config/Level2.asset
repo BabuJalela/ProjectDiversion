@@ -68,3 +68,9 @@ MonoBehaviour:
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
+  - ObjectId: FloatingPlane
+    levelObjects:
+      m_AssetGUID: bc8df129ff5b51d498c901b04c98bb3f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaterFill : MonoBehaviour
 {
+    public bool IsFill { get => isFill; }
     [SerializeField] private float speed = 0.01f;
     [SerializeField] private bool isFill = false;
      public bool isValveOpen = false;
@@ -23,7 +24,7 @@ public class WaterFill : MonoBehaviour
     {
         if (isFill)
         {
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
+            transform.Translate(Vector3.up * speed * Time.fixedDeltaTime);
         }
 
         if (isValveOpen == true) 

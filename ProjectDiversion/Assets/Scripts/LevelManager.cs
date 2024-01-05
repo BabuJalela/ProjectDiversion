@@ -1,18 +1,40 @@
 using Events;
 using UnityEngine;
 
-public class Level2Manager
+public class Level2Manager : BaseLevelManager
 {
     private bool isGeneratorActive = true;
     public bool isDoorBlocked = false;
-    public void OnStart()
+    public override void OnInitialize()
     {
 
     }
 
-    public void OnUpdate()
+    public override void OnRegisterListener()
+    {
+        GameEventManager.Instance.AddListener<LeverPullEvent>(OnLeverPull);
+        GameEventManager.Instance.AddListener<DoorBlockEvent>(OnDoorBlock);
+    }
+
+    public override void OnUnregisterListener()
+    {
+        GameEventManager.Instance.RemoveListener<LeverPullEvent>(OnLeverPull);
+        GameEventManager.Instance.RemoveListener<DoorBlockEvent>(OnDoorBlock);
+    }
+
+    public override void OnUpdate()
     {
         GeneratorMalfunction();
+    }
+
+    private void OnLeverPull(LeverPullEvent e)
+    {
+        OnLeverPull(e.canFill);
+    }
+
+    private void OnDoorBlock(DoorBlockEvent e)
+    {
+        isDoorBlocked = true;
     }
 
     public void OnLeverPull(bool isGeneratorActive)

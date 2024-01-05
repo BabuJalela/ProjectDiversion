@@ -39,11 +39,9 @@ public class SpawnObjectAddressables : MonoBehaviour
 
     public static GameObject GetLevelDatathroughID(string ObjectID)
     {
-        if (spawnedObjects.ContainsKey(ObjectID))
-        {
-            return spawnedObjects[ObjectID];
-        }
-        return null;
+
+        return spawnedObjects[ObjectID];
+
     }
 
 }
