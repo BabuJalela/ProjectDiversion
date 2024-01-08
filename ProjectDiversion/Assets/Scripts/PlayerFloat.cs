@@ -22,7 +22,7 @@ public class PlayerFloat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waterfill != null && waterfill.IsFill)
+      /*  if (waterfill != null && waterfill.IsFill)
         {
             if (transform.position.y > movementComponent.floatPoint.transform.position.y)
             {
@@ -32,7 +32,7 @@ public class PlayerFloat : MonoBehaviour
                 movementComponent.transform.GetComponent<Animator>().SetBool("InWater", true);
                 canFloat = true;
             }
-        }
+        }*/
 
     }
 

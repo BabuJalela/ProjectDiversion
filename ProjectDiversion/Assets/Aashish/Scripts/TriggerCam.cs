@@ -18,7 +18,7 @@ public class TriggerCam : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Bird"))
         {
             if(Input.GetKeyDown(KeyCode.F))
             {
@@ -32,7 +32,7 @@ public class TriggerCam : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Bird"))
         {
             PlayerCam.SetActive(true);
             ObjCam.SetActive(false);
