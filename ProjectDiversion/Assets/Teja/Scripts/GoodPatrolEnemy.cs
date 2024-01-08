@@ -1,3 +1,5 @@
+using DG.Tweening;
+using DialogueEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,18 +7,20 @@ public class GoodPatrolEnemy : MonoBehaviour
 {
     public Transform[] patrolWaypoint;
     public float patrolSpeed = 3f;
-    public float chaseSpeed = 5f;
+   // public float chaseSpeed = 5f;
     public float stoppingDistance = 2f;
     public LayerMask playerMask;
     public float dectionRange = 10f;
     private NavMeshAgent navMeshAgent;
     private int currentWaypointIndex = 0;
     public Transform player;
-    public Canvas WarnigCanvas;
+   // public Canvas WarnigCanvas;
+    [SerializeField] private NPCConversation npcConversation;
+   
 
     private void Start()
     {
-        WarnigCanvas.gameObject.SetActive(false);
+     //   WarnigCanvas.gameObject.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
         Setnextwaypoint();
 
@@ -24,14 +28,15 @@ public class GoodPatrolEnemy : MonoBehaviour
 
     private void Update()
     {
-        if(Dectedplayer())
-        {
-            Chaseplayer();
-        }
-        else
-        {
+       // if(Dectedplayer())
+       // {
+         //  Chaseplayer();
+      //  }
+      //  else
+       // {
             Patrol();
-        }
+          
+       // }
     }
 
     void Patrol()
@@ -53,25 +58,40 @@ public class GoodPatrolEnemy : MonoBehaviour
 
     }
 
-    bool Dectedplayer()
-    {
-        float distancetoplayer = Vector3.Distance(transform.position,player.position);
-        return distancetoplayer <= dectionRange;
-    }
+    //bool Dectedplayer()
+    //{
+    //    float distancetoplayer = Vector3.Distance(transform.position, player.position);
+    //    navMeshAgent.isStopped = true;
+    //    return distancetoplayer <= dectionRange;
 
-    void Chaseplayer()
-    {
-        navMeshAgent.speed = chaseSpeed;
-        navMeshAgent.destination = player.position;
 
-        if(Vector3.Distance(transform.position,player.position) <= stoppingDistance) 
+    //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             navMeshAgent.isStopped = true;
-            WarnigCanvas.gameObject.SetActive(true);
-        }
-        else 
-        {
+            ConversationManager.Instance.StartConversation(npcConversation);
             navMeshAgent.isStopped = false;
+
         }
+       
     }
+
+    //void Chaseplayer()
+    //{
+    //    navMeshAgent.speed = chaseSpeed;
+    //    navMeshAgent.destination = player.position;
+
+    //    if(Vector3.Distance(transform.position,player.position) <= stoppingDistance) 
+    //    {
+    //        navMeshAgent.isStopped = true;
+    //        WarnigCanvas.gameObject.SetActive(true);
+    //    }
+    //    else 
+    //    {
+    //        navMeshAgent.isStopped = false;
+    //    }
+    //}
 }

@@ -8,9 +8,8 @@ creat a end for the level.
 created a cave enterence 
 created a script to turn valve on and off need to make changes in the script 
 
-TO DO List 05-1-2024
-* Complete well water physics.
+TO DO List 08-1-2024
 * Create a villae setup
-* Learn json stuff
 * Add people and dialouges
 * polish level
+* mini map
