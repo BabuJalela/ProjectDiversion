@@ -9,60 +9,56 @@ public class EnemyPatrol : MonoBehaviour
     private int currentPatrolIndex = 0;
     public LayerMask playerLayer;
     public float detectionRange = 10f;
+    public float raydistance = 5f;
     private NavMeshAgent navMeshAgent;
     public Transform player;
     public GameObject playerPrefab;
     public float stoppingDistance = 5f;
     public Transform raycastpoint;
-   
+
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        SetNextPatrolPoint();        
+        SetNextPatrolPoint();
     }
 
     void Update()
     {
-        if (DetectPlayer())
+        if (WarnPlayer())
         {
-            ChasePlayer();          
+            Debug.Log("run away");
+            MoveSlow();
         }
         else
         {
-           Patrol();
+            SetNextPatrolPoint();
         }
+
         RaycastHit hit;
-        if (Physics.Raycast(raycastpoint.transform.position, transform.forward, out hit, detectionRange, playerLayer))
+        if (Physics.Raycast(raycastpoint.transform.position, transform.forward, out hit, raydistance, playerLayer))
         {
-            if (hit.collider.CompareTag("Player"))
-            {
-                PlayerCaught();
-            }
+            Debug.DrawRay(transform.position, transform.forward * raydistance, Color.red);
+            PlayerCaught();
+
+        }
+        else
+        {
+            Debug.DrawRay(raycastpoint.transform.position, transform.forward * raydistance, Color.green);
         }
     }
 
-    bool DetectPlayer()
-    {        
+    bool WarnPlayer()
+    {
         float distancetoplayer = Vector3.Distance(transform.position, player.position);
         return distancetoplayer <= detectionRange;
     }
-    void ChasePlayer()
-    {
-       Fast();
-       navMeshAgent.destination = player.position;
-    }
-    public void Fast()
-    {
-        navMeshAgent.speed = 5;
-    }
 
-
-
-    void Patrol()
+    private void MoveSlow()
     {
-            SetNextPatrolPoint();
-      
+        Debug.Log("orey ajmo lagetharoi");
+        navMeshAgent.speed = 1f;
+        navMeshAgent.SetDestination(player.position);
     }
 
     void SetNextPatrolPoint()
@@ -76,32 +72,26 @@ public class EnemyPatrol : MonoBehaviour
 
     void PlayerCaught()
     {
-
         Debug.Log("You Caught");
 
         if (Vector3.Distance(transform.position, player.position) <= stoppingDistance)
         {
             navMeshAgent.isStopped = true;
-            //WarnigCanvas.gameObject.SetActive(true);
         }
         else
         {
             navMeshAgent.isStopped = false;
         }
-        // just for testing
-        //Destroy(playerPrefab, 2f);
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             Debug.Log("You cauht again");
-           // Destroy(playerPrefab, 2f);
+
         }
     }
 
 }
 
- 

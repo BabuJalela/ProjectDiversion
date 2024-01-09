@@ -7,36 +7,23 @@ public class GoodPatrolEnemy : MonoBehaviour
 {
     public Transform[] patrolWaypoint;
     public float patrolSpeed = 3f;
-   // public float chaseSpeed = 5f;
-    public float stoppingDistance = 2f;
-    public LayerMask playerMask;
     public float dectionRange = 10f;
     private NavMeshAgent navMeshAgent;
     private int currentWaypointIndex = 0;
     public Transform player;
-   // public Canvas WarnigCanvas;
     [SerializeField] private NPCConversation npcConversation;
    
 
     private void Start()
     {
-     //   WarnigCanvas.gameObject.SetActive(false);
         navMeshAgent = GetComponent<NavMeshAgent>();
         Setnextwaypoint();
 
     }
 
     private void Update()
-    {
-       // if(Dectedplayer())
-       // {
-         //  Chaseplayer();
-      //  }
-      //  else
-       // {
-            Patrol();
-          
-       // }
+    {     
+      Patrol();
     }
 
     void Patrol()
@@ -58,15 +45,7 @@ public class GoodPatrolEnemy : MonoBehaviour
 
     }
 
-    //bool Dectedplayer()
-    //{
-    //    float distancetoplayer = Vector3.Distance(transform.position, player.position);
-    //    navMeshAgent.isStopped = true;
-    //    return distancetoplayer <= dectionRange;
-
-
-    //}
-
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -79,19 +58,5 @@ public class GoodPatrolEnemy : MonoBehaviour
        
     }
 
-    //void Chaseplayer()
-    //{
-    //    navMeshAgent.speed = chaseSpeed;
-    //    navMeshAgent.destination = player.position;
-
-    //    if(Vector3.Distance(transform.position,player.position) <= stoppingDistance) 
-    //    {
-    //        navMeshAgent.isStopped = true;
-    //        WarnigCanvas.gameObject.SetActive(true);
-    //    }
-    //    else 
-    //    {
-    //        navMeshAgent.isStopped = false;
-    //    }
-    //}
+    
 }
