@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class Movements : MonoBehaviour
 {
-    [SerializeField] private GameInputs inputActions;
+    private GameInputs inputActions;
     [SerializeField] private Animator animator;
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
     [SerializeField] private Rigidbody rb;
 
     private Vector3 playerMove;
@@ -30,11 +30,10 @@ public class Movements : MonoBehaviour
      [SerializeField] private Transform leftToHold;
      float positionweight = 0f;*/
 
+
     private void OnEnable()
     {
         mainCamera = Camera.main;
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerCrouch_ = false;
