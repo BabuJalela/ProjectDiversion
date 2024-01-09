@@ -4,24 +4,27 @@ using UnityEngine.InputSystem;
 public class Movements : MonoBehaviour
 {
     [SerializeField] private GameInputs inputActions;
-    [SerializeField] private CharacterController characterController;
     [SerializeField] private Animator animator;
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private float animationTransitionMultiplier = 10f;
+    [SerializeField] private Rigidbody rb;
 
     private Vector3 playerMove;
     private Vector3 moveDirection;
-    private bool playerSprint;
-    private bool playerCrouch;
-    private bool playerJump;
-    [SerializeField] private float jumpHeight;
-    private float jumpVelocity;
+
+    private bool playerSprint_;
+    private bool playerCrouch_;
+    private bool playerJump_;
     public bool inWater;
     public bool stopPlayerMove;
+    private bool isGrounded;
+
+    [SerializeField] private float animationTransitionMultiplier = 10f;
+    [SerializeField] private float jumpForce = 2f;
+    //private float jumpVelocity;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
-    private float playerGravity = -9.81f;
-
+    //[SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float rayLength = 0.1f;
     /* // IK
      [SerializeField] private Transform rightToHold;
      [SerializeField] private Transform leftToHold;
@@ -31,10 +34,10 @@ public class Movements : MonoBehaviour
     {
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerCrouch = false;
+        playerCrouch_ = false;
 
         inputActions = new GameInputs();
         inputActions.Enable();
@@ -62,22 +65,21 @@ public class Movements : MonoBehaviour
     }
     private void GetSprintValue(InputAction.CallbackContext context)
     {
-        playerSprint = context.ReadValueAsButton();
+        playerSprint_ = context.ReadValueAsButton();
     }
     private void GetJumpValue(InputAction.CallbackContext context)
     {
-        playerJump = context.ReadValueAsButton();
-        //JumpLogic(playerJump);
+        playerJump_ = context.ReadValueAsButton();
     }
     private void GetCrouchValues(InputAction.CallbackContext context)
     {
-        playerCrouch = context.ReadValueAsButton();
+        playerCrouch_ = context.ReadValueAsButton();
     }
 
     private void Update()
     {
         Move();
-        animations();
+        Animations();
     }
     private void Move()
     {
@@ -86,42 +88,82 @@ public class Movements : MonoBehaviour
             playerMove.x = 0;
             playerMove.z = 0;
         }
-        if (playerJump && characterController.isGrounded)
-        {
-            jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * playerGravity);
-        }
-        jumpVelocity += playerGravity * Time.deltaTime;
-        /*else
-        {
-            playerGravity -= Time.deltaTime * 2f;
-            playerGravity = Mathf.Clamp(playerGravity, 0f, -9.81f);
-        }*/
+
         //Debug.Log(playerMove);
         float applyWalkSpeed;
         float applySprintSpeed;
 
-        playerMove.y = inWater ? 0f : playerGravity;// player not floating
-        playerMove.y = playerJump ? jumpVelocity : playerGravity;
+        /*playerMove.y = inWater ? 0f : playerGravity;// player not floating*/
+        if (inWater)
+        {
+            rb.useGravity = false;
+        }
+        else
+        {
+            rb.useGravity = true;
+        }
 
-        applyWalkSpeed = (inWater || playerCrouch) ? walkSpeed / 2 : walkSpeed;
-        applySprintSpeed = (inWater || playerCrouch) ? sprintSpeed / 2 : sprintSpeed;
+        applyWalkSpeed = (inWater || playerCrouch_) ? walkSpeed / 2 : walkSpeed;
+        applySprintSpeed = (inWater || playerCrouch_) ? sprintSpeed / 2 : sprintSpeed;
 
         //Debug.Log($"applywalk : {applyWalkSpeed}, applysprint : {applySprintSpeed}");
 
         moveDirection = transform.TransformVector(playerMove);
-        if (playerSprint)
+        Vector3 movement;
+        if (playerSprint_)
         {
-            characterController.Move(applySprintSpeed * Time.deltaTime * moveDirection);
+            movement = applySprintSpeed * Time.deltaTime * moveDirection;
         }
         else
         {
-            characterController.Move(applyWalkSpeed * Time.deltaTime * moveDirection);
+            movement = applyWalkSpeed * Time.deltaTime * moveDirection;
+        }
+        Vector3 currentPosition = transform.position;
+        Vector3 newPosition = currentPosition + movement;
+        transform.position = newPosition;
+
+        IsGroundedCheck();
+
+        if (playerJump_ && isGrounded)
+        {
+            isGrounded = false;
+            Jump();
         }
     }
-    /*private void JumpLogic(bool _playerJump)
+    void Jump()
     {
+        rb.AddForce(jumpForce * Time.deltaTime * Vector3.up, ForceMode.Impulse);
+    }
 
-    }*/
+    void IsGroundedCheck()
+    {
+        if (isGrounded)
+        {
+            return;
+        }
+        if (rb.velocity.y > 0)
+        {
+            return;
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f))
+        {
+            Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.red);
+            Debug.Log($"hiting ground : {hit.transform.name}");
+            if (hit.distance < rayLength)
+            {
+                isGrounded = true;
+            }
+            //if (hit.transform.tag == "Ground")
+            //    isGrounded = true;
+        }
+        //else
+        //{
+        //    Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.yellow);
+        //    Debug.Log($"not hiting ground");
+        //    isGrounded = false;
+        //}
+    }
 
     /*private void OnAnimatorIK()
     {
@@ -151,10 +193,10 @@ public class Movements : MonoBehaviour
         }
     }*/
 
-    private void animations()
+    private void Animations()
     {
         Vector2 intended = new Vector2(playerMove.x, playerMove.z);
-        intended /= (playerSprint ? 1f : 2f);
+        intended /= (playerSprint_ ? 1f : 2f);
 
         Vector2 currentValue = new Vector2(animator.GetFloat("VelocityX"), animator.GetFloat("VelocityZ"));
 
@@ -163,7 +205,7 @@ public class Movements : MonoBehaviour
         animator.SetFloat("VelocityX", result.x);
         animator.SetFloat("VelocityZ", result.y);
 
-        if (playerCrouch && !inWater)
+        if (playerCrouch_ && !inWater)
         {
             animator.SetBool("Crouch", true);
             animator.SetFloat("VelocityX", playerMove.x);
@@ -183,7 +225,7 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("InWater", false);
         }
-        if (playerJump)
+        if (playerJump_)
         {
             animator.SetBool("Jump", true);
         }
@@ -191,7 +233,6 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("Jump", false);
         }
-
     }
 
     private void LateUpdate()

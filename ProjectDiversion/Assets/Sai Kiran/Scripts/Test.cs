@@ -2,33 +2,25 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    // this script pushes all rigidbodies that the character touches
-    float pushPower = 2.0f;
-    void OnControllerColliderHit(ControllerColliderHit hit)
+
+    public float moveSpeed = 5f; // Adjust the speed in the Inspector
+
+    void Update()
     {
-        Rigidbody body = hit.collider.attachedRigidbody;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        // no rigidbody
-        if (body == null || body.isKinematic)
-        {
-            //return;
+        Vector3 movement = new Vector3(horizontal, 0f, vertical) * moveSpeed * Time.deltaTime;
 
-        }
+        // Get the current position of the player
+        Vector3 currentPosition = transform.position;
 
-        // We dont want to push objects below us
-        if (hit.moveDirection.y < -0.3)
-        {
-            return;
-        }
+        // Calculate the new position based on input and speed
+        Vector3 newPosition = currentPosition + movement;
 
-        // Calculate push direction from move direction,
-        // we only push objects to the sides never up and down
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-
-        // If you know how fast your character is trying to move,
-        // then you can also multiply the push velocity by that.
-
-        // Apply the push
-        body.velocity = pushDir * pushPower;
+        // Update the player's position directly
+        transform.position = newPosition;
     }
 }
+
+
