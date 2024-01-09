@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RotateOnSpace : MonoBehaviour
 {
+    public SignRotation sr;
+
     private float initialRotationX = 0f;
     public float initialRotationY = 0f;
     private float initialRotationZ = 0f;
@@ -17,6 +19,7 @@ public class RotateOnSpace : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 targetRotation = Quaternion.Euler(initialRotationX, initialRotationY, initialRotationZ);
+                sr.yesRotate();
             }
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
