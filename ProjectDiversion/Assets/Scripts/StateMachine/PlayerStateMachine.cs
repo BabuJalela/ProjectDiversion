@@ -5,17 +5,14 @@ using System.Collections.Generic;
 public class PlayerStateMachine : BaseStateMachine, IController
 {
     private Dictionary<string, State> playerStates;
-    private PlayerData playerData;
-    public PlayerStateMachine(PlayerData playerData, LevelData levelData)
+    public PlayerStateMachine()
     {
-        this.playerData = playerData;
+
         playerStates = new Dictionary<string, State>()
         {
-            { StateIDs.IDLESTATE, new PlayerIdleState(playerData) },
-            { StateIDs.RUNSTATE, new PlayerRunState(playerData)},
-            { StateIDs.LEVERSTATE, new LeverState(levelData) },
-            { StateIDs.PUSHSTATE, new PushState()}
-    };
+            { StateIDs.IDLESTATE, new PlayerIdleState() },
+            { StateIDs.RUNSTATE, new PlayerRunState()}
+        };
     }
     public void Initialize()
     {

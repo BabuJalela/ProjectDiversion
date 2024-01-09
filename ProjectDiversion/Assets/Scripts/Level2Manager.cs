@@ -66,13 +66,5 @@ public class Level2Manager : BaseLevelManager
         }
     }
 
-    private void ReduceCuboardWeightToMove()
-    {
-        StoredObjects storedObjects = SpawnObjectAddressables.GetLevelDatathroughID("Cuboard").GetComponentInChildren<StoredObjects>();
-        if (storedObjects != null)
-        {
-
-        }
-    }
 
 }
