@@ -57,20 +57,12 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Level2/DoorWall.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: ca44178db1a54104ba1f029107a96e31
-    m_Address: Assets/Prefabs/Player/Player.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 436eb00e87de0e543b1d7085d66f199f
     m_Address: Assets/Prefabs/ExitCam.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 5534954496577b94580e9471873dd2bd
     m_Address: Assets/Prefabs/Level2/WaterPipe2.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: c4752c59ecb6742458dbca5d43a5d68f
-    m_Address: Assets/Prefabs/Player/Level2Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: bc8df129ff5b51d498c901b04c98bb3f
