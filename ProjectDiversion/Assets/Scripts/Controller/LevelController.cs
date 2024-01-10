@@ -20,7 +20,7 @@ public class LevelController : IController
 
     public void RegisterListener()
     {
-        activeLevelManager.OnInitialize();
+        activeLevelManager.OnRegisterListener();
     }
 
     public void UnRegisterListener()

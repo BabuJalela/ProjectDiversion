@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8640757964829249334}
-  - component: {fileID: 8640757966146411189}
   m_Layer: 0
   m_Name: StoredObjects
   m_TagString: Untagged
@@ -39,23 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8640757966146411189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8640757964829249329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8b5dcb180bd2f04a8d49444410400fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crates:
-  - {fileID: 8253429060415048811}
-  - {fileID: 8253429059157948331}
-  - {fileID: 8253429059630578406}
-  - {fileID: 8253429059389121066}
 --- !u!1001 &633325601
 PrefabInstance:
   m_ObjectHideFlags: 0

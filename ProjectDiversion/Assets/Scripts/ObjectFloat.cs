@@ -3,6 +3,8 @@ using UnityEngine;
 public class ObjectFloat : MonoBehaviour
 {
     [SerializeField] private bool isFloat = false;
+    [SerializeField] Transform floatingPoint;
+    [SerializeField] Movements movements;
     private Transform waterInitialPoint;
     float angle = 0;
     // Start is called before the first frame update
@@ -14,6 +16,11 @@ public class ObjectFloat : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (waterInitialPoint.transform.position.y > floatingPoint.transform.position.y && !isFloat)
+        {
+            isFloat = true;
+            movements.inWater = true;
+        }
         if (isFloat)
         {
             if (transform.position.y != waterInitialPoint.position.y)
@@ -30,9 +37,9 @@ public class ObjectFloat : MonoBehaviour
 
     private void ObjectFloatingAnim()
     {
-        angle += Time.deltaTime * 1.5f;
-        float nosPosY = transform.position.y + Mathf.Sin(angle) * .2f;
-        transform.position = new Vector3(transform.position.x, nosPosY, transform.position.z);
+        angle += Time.deltaTime * 1.2f;
+        float nosPosY = transform.position.y + Mathf.Sin(angle) * .05f;
+        transform.position = new Vector3(transform.position.x, nosPosY - 1.2f, transform.position.z);
     }
 
 

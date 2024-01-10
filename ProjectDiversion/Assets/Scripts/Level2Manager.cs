@@ -12,13 +12,13 @@ public class Level2Manager : BaseLevelManager
 
     public override void OnRegisterListener()
     {
-        GameEventManager.Instance.AddListener<LeverPullEvent>(OnLeverPull);
+        GameEventManager.Instance.AddListener<LeverPullEvent>(OnLeverActivate);
         GameEventManager.Instance.AddListener<DoorBlockEvent>(OnDoorBlock);
     }
 
     public override void OnUnregisterListener()
     {
-        GameEventManager.Instance.RemoveListener<LeverPullEvent>(OnLeverPull);
+        GameEventManager.Instance.RemoveListener<LeverPullEvent>(OnLeverActivate);
         GameEventManager.Instance.RemoveListener<DoorBlockEvent>(OnDoorBlock);
     }
 
@@ -27,7 +27,7 @@ public class Level2Manager : BaseLevelManager
         GeneratorMalfunction();
     }
 
-    private void OnLeverPull(LeverPullEvent e)
+    private void OnLeverActivate(LeverPullEvent e)
     {
         OnLeverPull(e.canFill);
     }
@@ -47,6 +47,9 @@ public class Level2Manager : BaseLevelManager
             waterFallPS2.Play();
             GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent(true));
             SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 1;
+            var Outdoor = SpawnObjectAddressables.GetLevelDatathroughID("Outdoor");
+            Outdoor.transform.position = new Vector3(Outdoor.transform.position.x, Outdoor.transform.position.y + 5f, Outdoor.transform.position.z);
+            SpawnObjectAddressables.GetLevelDatathroughID("Light").SetActive(true);
         }
         else
         {
@@ -54,6 +57,7 @@ public class Level2Manager : BaseLevelManager
             waterFallPS2.Stop();
             GameEventManager.Instance.TriggerEvent(new FollowWaterLevelEvent(false));
             SpawnObjectAddressables.GetLevelDatathroughID("Generator").GetComponentInChildren<Light>().intensity = 0;
+            SpawnObjectAddressables.GetLevelDatathroughID("Light").SetActive(false);
         }
     }
 
