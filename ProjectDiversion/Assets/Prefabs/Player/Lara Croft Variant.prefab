@@ -2174,7 +2174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380469379844287}
-  m_LocalRotation: {x: 0.024565995, y: 0.9743014, z: 0.1803178, w: -0.1327361}
+  m_LocalRotation: {x: 0.028217446, y: 0.97140944, z: 0.17978258, w: -0.15246576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6666,7 +6666,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470389617347}
-  m_LocalRotation: {x: 0.024565995, y: 0.9743014, z: 0.1803178, w: -0.1327361}
+  m_LocalRotation: {x: 0.028217446, y: 0.97140944, z: 0.17978258, w: -0.15246576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7750,7 +7750,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470633416119}
-  m_LocalRotation: {x: 0.024565995, y: 0.9743014, z: 0.1803178, w: -0.1327361}
+  m_LocalRotation: {x: 0.028217446, y: 0.97140944, z: 0.17978258, w: -0.15246576}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8359,6 +8359,7 @@ GameObject:
   - component: {fileID: 4474380470773617302}
   - component: {fileID: 4474380470773617301}
   - component: {fileID: 4474380470773617300}
+  - component: {fileID: 1319717984}
   m_Layer: 0
   m_Name: Lara Croft Variant
   m_TagString: Player
@@ -8446,9 +8447,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1531cfc7b6f927b45b1b8d8eea5aa71e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  mainCamera: {fileID: 0}
-  rb: {fileID: 0}
+  inputManager: {fileID: 1319717984}
+  animator: {fileID: 4474380470773617303}
+  rb: {fileID: 4474380470773617302}
+  capsuleCollider: {fileID: 4474380470773617301}
   inWater: 0
   stopPlayerMove: 0
   animationTransitionMultiplier: 10
@@ -8456,6 +8458,18 @@ MonoBehaviour:
   walkSpeed: 2
   sprintSpeed: 5
   rayLength: 0.1
+--- !u!114 &1319717984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4474380470773617387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bea75d6dbc824347b7fe1099b663610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4474380470775829317
 GameObject:
   m_ObjectHideFlags: 0
