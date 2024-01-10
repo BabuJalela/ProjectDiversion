@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 431718}
   - component: {fileID: 3381402}
   - component: {fileID: 2390044}
-  - component: {fileID: 6586982}
   m_Layer: 0
   m_Name: Struct_Fence1_Gate_A_Door_LOD2
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6586982
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102486}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.7588952, y: 4.082547, z: 0.24861725}
-  m_Center: {x: -1.3401359, y: 2.0442548, z: 0.07750932}
 --- !u!1 &127120
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +253,6 @@ GameObject:
   - component: {fileID: 490938}
   - component: {fileID: 3362684}
   - component: {fileID: 2327376}
-  - component: {fileID: 6593462}
   m_Layer: 0
   m_Name: Struct_Fence1_Gate_A_Door_LOD1
   m_TagString: Untagged
@@ -340,16 +325,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6593462
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143732}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.7588952, y: 4.082547, z: 0.24861725}
-  m_Center: {x: -1.3401359, y: 2.0442548, z: 0.07750932}
