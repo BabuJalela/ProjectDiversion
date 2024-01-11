@@ -1,8 +1,8 @@
 
 public class StateIDs
 {
-    public const string IDLESTATE = "IdleState";
-    public const string RUNSTATE = "RunState";
+    public const string PLAYERGROUNDSTATE = "PlayerGroundState";
+    public const string PLAYERWATERSTATE = "PlayerWaterState";
 }
 
 public static class levelIDs
@@ -12,7 +12,7 @@ public static class levelIDs
     public const string LEVEL3 = "Level3";
 }
 
-public static class levelSpawnedGameObjectIDs
+public static class level2SpawnedObjectIDs
 {
     public const string PLAYER = "Player";
     public const string LEVEL2 = "Level2";

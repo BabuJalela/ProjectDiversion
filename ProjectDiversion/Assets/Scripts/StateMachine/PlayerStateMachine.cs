@@ -7,11 +7,10 @@ public class PlayerStateMachine : BaseStateMachine, IController
     private Dictionary<string, State> playerStates;
     public PlayerStateMachine()
     {
-
         playerStates = new Dictionary<string, State>()
         {
-            { StateIDs.IDLESTATE, new PlayerIdleState() },
-            { StateIDs.RUNSTATE, new PlayerRunState()}
+            { StateIDs.PLAYERGROUNDSTATE, new PlayerGroundState() },
+            { StateIDs.PLAYERWATERSTATE, new PlayerWaterState()}
         };
     }
     public void Initialize()

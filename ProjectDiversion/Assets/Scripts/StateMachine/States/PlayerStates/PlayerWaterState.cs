@@ -1,8 +1,7 @@
 using StateMachine;
 
-public class PlayerRunState : State
+public class PlayerWaterState : State
 {
-
     public override void OnEnter()
     {
 

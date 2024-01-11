@@ -77,6 +77,18 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Level2/StoredObjects.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 57cf39402aabce04ebb44080d9f68913
+    m_Address: Assets/Prefabs/Level2/LP_Bay_Door_snaps Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ba316c2f464e51a4cbc56ae4190c4708
+    m_Address: Assets/Prefabs/Level2/Wall Light Variant 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8405239a9f31193419c8dba0747b569d
+    m_Address: Assets/Prefabs/Level2/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f46af87e16244d340bb03a659809deaf, type: 2}
   m_SchemaSet:

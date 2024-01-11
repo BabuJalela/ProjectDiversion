@@ -9,10 +9,10 @@ created a cave enterence
 created a script to turn valve on and off need to make changes in the script 
 
 TO DO List 09-1-2024
-* Create a villae setup
-* Add people and dialouges
 * polish level
 * mini map
+* Optmize scene
+
 
 
  
