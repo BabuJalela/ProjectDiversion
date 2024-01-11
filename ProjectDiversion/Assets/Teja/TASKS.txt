@@ -12,6 +12,9 @@ TO DO List 09-1-2024
 * polish level
 * mini map
 * Optmize scene
+* Try to use raycast everywhere
+* mansison doors
+* pumphouse door key
 
 
 

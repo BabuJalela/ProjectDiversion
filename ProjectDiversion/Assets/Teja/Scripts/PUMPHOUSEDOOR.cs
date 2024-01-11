@@ -7,7 +7,8 @@ public class PUMPHOUSEDOOR : MonoBehaviour
     private float initialRotationX = 0f;
     public float initialRotationY = 0f;
     private float initialRotationZ = 0f;
-    private bool isfire = false;    
+    private bool isfire = false;
+    public Note note;
 
     private Quaternion targetRotation;
 
@@ -28,22 +29,24 @@ public class PUMPHOUSEDOOR : MonoBehaviour
 
     private void Opendoors()
     {
-
-        targetRotation = Quaternion.Euler(initialRotationX, initialRotationY, initialRotationZ);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if(note.isCollected)
+        {
+         targetRotation = Quaternion.Euler(initialRotationX, initialRotationY, initialRotationZ);
+         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 
     private void Update()
     {
-        if(isfire)
-        {
+      if( isfire)
+       {
             Opendoors();
 
-        }
+       }
     }
 
     public void CanOpen() 
     {
-        isfire = true; 
+        if(note.isCollected) isfire = true;
     }
 }
