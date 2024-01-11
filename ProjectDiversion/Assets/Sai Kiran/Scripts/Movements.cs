@@ -22,12 +22,14 @@ public class Movements : MonoBehaviour
     [SerializeField] private Vector3 crouchCenter;
 
 
+    [SerializeField] private bool inWater;
+    [SerializeField] private bool stopPlayerMove;
+    [SerializeField] private bool canCrouch;
     private bool playerSprint_;
     private bool playerCrouch_;
     private bool playerJump_;
-    public bool inWater;
-    public bool stopPlayerMove;
     private bool isGrounded;
+
 
     [SerializeField] private float animationTransitionMultiplier = 10f;
     [SerializeField] private float jumpForce = 2f;
@@ -52,7 +54,6 @@ public class Movements : MonoBehaviour
         mainCamera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerCrouch_ = false;
 
         inputActions = new GameInputs();
         inputActions.Enable();
@@ -91,6 +92,13 @@ public class Movements : MonoBehaviour
     private void GetCrouchValues(InputAction.CallbackContext context)
     {
         playerCrouch_ = context.ReadValueAsButton();
+        Debug.Log($"{context}");
+
+        if (context.performed)
+        {
+            canCrouch = !canCrouch;
+            Debug.Log($"{canCrouch}");
+        }
     }
 
     private void Update()
@@ -98,6 +106,7 @@ public class Movements : MonoBehaviour
         //IsGroundedCheck();
         Move();
         Animations();
+
     }
     private void Move()
     {
@@ -122,25 +131,25 @@ public class Movements : MonoBehaviour
         applyWalkSpeed = (inWater || playerCrouch_) ? walkSpeed / 2 : walkSpeed;
         applySprintSpeed = (inWater || playerCrouch_) ? sprintSpeed / 2 : sprintSpeed;
 
-        Debug.Log($"applywalk : {applyWalkSpeed}, applysprint : {applySprintSpeed}");
+        //Debug.Log($"applywalk : {applyWalkSpeed}, applysprint : {applySprintSpeed}");
 
         moveDirection = transform.TransformVector(playerMove_);
 
         if (playerSprint_)
         {
             movement = applySprintSpeed * Time.deltaTime * moveDirection;
-            //Debug.Log($"sprint {rb.velocity}");
+
         }
         else
         {
             movement = applyWalkSpeed * Time.deltaTime * moveDirection;
-            //Debug.Log($"walk {rb.velocity}");
+
         }
         currentPosition = transform.position;
         newPosition = currentPosition + movement;
         transform.position = newPosition;
 
-        if (playerCrouch_)
+        if (canCrouch)
         {
             // change height and offset
             capsuleCollider.height = crouchHeight;
@@ -195,7 +204,7 @@ public class Movements : MonoBehaviour
         animator.SetFloat("VelocityX", result.x);
         animator.SetFloat("VelocityZ", result.y);
 
-        if (playerCrouch_ && !inWater)
+        if (canCrouch && !inWater)
         {
             animator.SetBool("Crouch", true);
             animator.SetFloat("VelocityX", playerMove_.x);
