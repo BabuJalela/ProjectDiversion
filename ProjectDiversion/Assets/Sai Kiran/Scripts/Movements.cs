@@ -22,9 +22,9 @@ public class Movements : MonoBehaviour
     [SerializeField] private Vector3 crouchCenter;
 
 
-    [SerializeField] private bool inWater;
-    [SerializeField] private bool stopPlayerMove;
-    [SerializeField] private bool canCrouch;
+    public bool inWater;
+    public bool stopPlayerMove;
+    public bool canCrouch;
     private bool playerSprint_;
     private bool playerCrouch_;
     private bool playerJump_;
