@@ -41,9 +41,7 @@ public class Picables : MonoBehaviour
             rb.MovePosition(newsposition);
 
         }
-
     }
 
-   
     
 }
