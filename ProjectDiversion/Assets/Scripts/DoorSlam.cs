@@ -25,6 +25,7 @@ public class DoorSlam : MonoBehaviour
         {
             audioSource.Play();
             door.transform.localPosition = new Vector3(0, 0, 0);
+            SpawnObjectAddressables.GetLevelDatathroughID(level2SpawnedObjectIDs.PLAYER).GetComponent<Movements>().stopPlayerMove = true;
             Invoke(nameof(ExitCamActive), 2f);
             isPlayed = true;
         }
