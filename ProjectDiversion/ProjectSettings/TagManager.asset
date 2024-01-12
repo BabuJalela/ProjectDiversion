@@ -14,6 +14,7 @@ TagManager:
   - Bird
   - FakeBird
   - Ground
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Post processing
   - interactableLayer
   - sullet
-  - 
+  - TunnelLayer
   - 
   - 
   - 

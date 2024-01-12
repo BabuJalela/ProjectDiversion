@@ -26,7 +26,6 @@ public class Movements : MonoBehaviour
     public bool stopPlayerMove;
     public bool canCrouch;
     private bool playerSprint_;
-    private bool playerCrouch_;
     private bool playerJump_;
     private bool isGrounded;
 
@@ -38,11 +37,10 @@ public class Movements : MonoBehaviour
     [SerializeField] private float rayLength = 0.1f;
     [SerializeField] private float standHeight;
     [SerializeField] private float crouchHeight;
-
     private float applyWalkSpeed;
     private float applySprintSpeed;
-    //[SerializeField] private float gravity = -9.81f;
-    //private float jumpVelocity;
+    private int hitLayer;
+
     /* // IK
      [SerializeField] private Transform rightToHold;
      [SerializeField] private Transform leftToHold;
@@ -85,26 +83,30 @@ public class Movements : MonoBehaviour
     }
     private void GetJumpValue(InputAction.CallbackContext context)
     {
-        playerJump_ = context.ReadValueAsButton();
         if (context.performed)
-            Jump();
+        {
+            playerJump_ = context.ReadValueAsButton();
+            Debug.Log($"jumped");
+        }
     }
     private void GetCrouchValues(InputAction.CallbackContext context)
     {
-        playerCrouch_ = context.ReadValueAsButton();
-        Debug.Log($"{context}");
+        //Debug.Log($"{context}");
 
         if (context.performed)
         {
             canCrouch = !canCrouch;
             Debug.Log($"{canCrouch}");
         }
+        //Crouch();
     }
 
     private void Update()
     {
-        //IsGroundedCheck();
+
+        IsGroundedCheck();
         Move();
+        Crouch();
         Animations();
 
     }
@@ -115,10 +117,6 @@ public class Movements : MonoBehaviour
             playerMove_.x = 0;
             playerMove_.z = 0;
         }
-
-        //Debug.Log(playerMove);
-
-        /*playerMove.y = inWater ? 0f : playerGravity;// player not floating*/
         if (inWater)
         {
             rb.useGravity = false;
@@ -128,8 +126,8 @@ public class Movements : MonoBehaviour
             rb.useGravity = true;
         }
 
-        applyWalkSpeed = (inWater || playerCrouch_) ? walkSpeed / 2 : walkSpeed;
-        applySprintSpeed = (inWater || playerCrouch_) ? sprintSpeed / 2 : sprintSpeed;
+        applyWalkSpeed = (inWater || canCrouch) ? walkSpeed / 2 : walkSpeed;
+        applySprintSpeed = (inWater || canCrouch) ? walkSpeed / 2 : sprintSpeed;
 
         //Debug.Log($"applywalk : {applyWalkSpeed}, applysprint : {applySprintSpeed}");
 
@@ -148,6 +146,18 @@ public class Movements : MonoBehaviour
         currentPosition = transform.position;
         newPosition = currentPosition + movement;
         transform.position = newPosition;
+    }
+    private void Crouch()
+    {
+        if (hitLayer == 11)
+        {
+            canCrouch = true;
+        }
+        /* else
+         {
+             canCrouch = false;
+         }*/
+
 
         if (canCrouch)
         {
@@ -160,32 +170,25 @@ public class Movements : MonoBehaviour
             capsuleCollider.height = standHeight;
             capsuleCollider.center = standCenter;
         }
-    }
 
+
+    }
     private void Jump()
     {
-        Debug.Log($"Jump!");
-        /*if (playerJump_ && isGrounded)
-        {
-            isGrounded = false;
-            Jump();
-        }*/
+
     }
     void IsGroundedCheck()
     {
-        if (isGrounded)
-        {
-            return;
-        }
-        if (rb.velocity.y > 0)
-        {
-            return;
-        }
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f))
         {
             Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.red);
-            Debug.Log($"hiting ground : {hit.transform.name}");
+            //Debug.Log($"hiting ground : {hit.transform.name}");
+
+            hitLayer = hit.transform.gameObject.layer;
+            Debug.Log($"Layer : {hitLayer}");
+
             if (hit.distance < rayLength)
             {
                 isGrounded = true;
