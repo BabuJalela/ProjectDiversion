@@ -8453,7 +8453,7 @@ MonoBehaviour:
   crouchCenter: {x: 0, y: 0.5, z: 0}
   inWater: 0
   stopPlayerMove: 0
-  canCrouch: 1
+  canCrouch: 0
   animationTransitionMultiplier: 10
   jumpForce: 2
   walkSpeed: 2
