@@ -4,22 +4,58 @@ using UnityEngine;
 
 public class ObjectivesTriggers : MonoBehaviour
 {
-    public GameObject objectives;
-    public float timetodestroy = 10f;
-
-    private void Start()
-    {
-        objectives.SetActive(false);
-    }
+   // public GameObject p1;
+   // public GameObject p2;
+   // public GameObject p3;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
-            objectives.SetActive(true);
+            DeactivateALLPanels();
+
+            //if(gameObject.CompareTag("Trigger1"))
+            //{
+            //    //p1.SetActive(true);
+            //    Debug.Log("panel1 activated");
+            //}
+            //else if(gameObject.CompareTag("Trigger2"))
+            //{
+            //    //p2.SetActive(true);
+            //    Debug.Log("panel2 activated");
+            //}
+            //else if(gameObject.CompareTag("Trigger3"))
+            //{
+            //    //p3.SetActive(true);
+            //    Debug.Log("panel3 activated");
+            //}
+
+            switch (gameObject.tag) 
+            {
+                case "Trigger1":
+                    Debug.Log("panel1 activated");
+                    break;
+                case "Trigger2":
+                    Debug.Log("panel2 activated");
+                    break;
+                case "Trigger3":
+                    Debug.Log("panel3 activated");
+                    break;
+
+                default:
+                    break;
+            }
+
+
         }
-        Destroy(objectives, timetodestroy);
     }
 
-    
+    void DeactivateALLPanels()
+    {
+        //p1.SetActive(false);
+        //p2.SetActive(false);
+        //p3.SetActive(false);
+        Debug.Log("all panels deactivated");
+    }
+
 }

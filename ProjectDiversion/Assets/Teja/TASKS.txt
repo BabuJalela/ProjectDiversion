@@ -10,7 +10,6 @@ created a script to turn valve on and off need to make changes in the script
 
 TO DO List 09-1-2024
 * polish level
-* mini map
 * Optmize scene
 * Try to use raycast everywhere
 * mansison doors
