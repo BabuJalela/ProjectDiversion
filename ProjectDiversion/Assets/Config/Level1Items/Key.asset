@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   Name: Key
+  canDrop: 0
   icon: {fileID: 0}

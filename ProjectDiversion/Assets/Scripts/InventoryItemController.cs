@@ -23,7 +23,15 @@ public class InventoryItemController : MonoBehaviour
     }
     public void RemoveItem()
     {
-        InventoryManager.instance.RemoveItem(item);
-        Destroy(this.gameObject);
+        if (item.canDrop)
+        {
+            InventoryManager.instance.RemoveItem(item);
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Debug.Log("Cannot be Droped, Main Item");
+        }
+
     }
 }
