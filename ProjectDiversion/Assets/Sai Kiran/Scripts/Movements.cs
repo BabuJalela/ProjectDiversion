@@ -18,8 +18,8 @@ public class Movements : MonoBehaviour
     private Vector2 currentValue;
     private Vector2 result;
     private Vector3 facingDirection;
-    [SerializeField] private Vector3 standCenter;
-    [SerializeField] private Vector3 crouchCenter;
+    [SerializeField] private Vector3 ControllerStandCenter;
+    [SerializeField] private Vector3 controllerCrouchCenter;
 
 
     public bool inWater;
@@ -31,12 +31,12 @@ public class Movements : MonoBehaviour
 
 
     [SerializeField] private float animationTransitionMultiplier = 10f;
-    [SerializeField] private float jumpForce = 2f;
+    [SerializeField] private float jumpForce = -0.2f;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
     [SerializeField] private float rayLength = 0.1f;
-    [SerializeField] private float standHeight;
-    [SerializeField] private float crouchHeight;
+    [SerializeField] private float colliderStandHeight;
+    [SerializeField] private float colliderCrouchHeight;
     private float applyWalkSpeed;
     private float applySprintSpeed;
     private int hitLayer;
@@ -67,9 +67,9 @@ public class Movements : MonoBehaviour
         inputActions.Player.Jump.performed += GetJumpValue;
         inputActions.Player.Jump.canceled += GetJumpValue;
 
-        inputActions.Interactions.Crouch.started += GetCrouchValues;
-        inputActions.Interactions.Crouch.performed += GetCrouchValues;
-        inputActions.Interactions.Crouch.canceled += GetCrouchValues;
+        inputActions.Player.Crouch.started += GetCrouchValues;
+        inputActions.Player.Crouch.performed += GetCrouchValues;
+        inputActions.Player.Crouch.canceled += GetCrouchValues;
     }
 
     private void GetMoveValues(InputAction.CallbackContext context)
@@ -81,35 +81,31 @@ public class Movements : MonoBehaviour
     {
         playerSprint_ = context.ReadValueAsButton();
     }
+
     private void GetJumpValue(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            playerJump_ = context.ReadValueAsButton();
-            Debug.Log($"jumped");
-        }
+        playerJump_ = context.ReadValueAsButton();
     }
+
     private void GetCrouchValues(InputAction.CallbackContext context)
     {
         //Debug.Log($"{context}");
-
         if (context.performed)
         {
             canCrouch = !canCrouch;
             Debug.Log($"{canCrouch}");
         }
-        //Crouch();
     }
 
     private void Update()
     {
-
         IsGroundedCheck();
         Move();
         Crouch();
+        Jump();
         Animations();
-
     }
+
     private void Move()
     {
         if (stopPlayerMove)
@@ -117,6 +113,7 @@ public class Movements : MonoBehaviour
             playerMove_.x = 0;
             playerMove_.z = 0;
         }
+
         if (inWater)
         {
             rb.useGravity = false;
@@ -127,7 +124,19 @@ public class Movements : MonoBehaviour
         }
 
         applyWalkSpeed = (inWater || canCrouch) ? walkSpeed / 2 : walkSpeed;
-        applySprintSpeed = (inWater || canCrouch) ? walkSpeed / 2 : sprintSpeed;
+
+        if (inWater && !canCrouch)
+        {
+            applySprintSpeed = sprintSpeed / 2;
+        }
+        else if (canCrouch && !inWater)
+        {
+            applySprintSpeed = walkSpeed / 2;
+        }
+        else
+        {
+            applySprintSpeed = sprintSpeed;
+        }
 
         //Debug.Log($"applywalk : {applyWalkSpeed}, applysprint : {applySprintSpeed}");
 
@@ -136,17 +145,16 @@ public class Movements : MonoBehaviour
         if (playerSprint_)
         {
             movement = applySprintSpeed * Time.deltaTime * moveDirection;
-
         }
         else
         {
             movement = applyWalkSpeed * Time.deltaTime * moveDirection;
-
         }
         currentPosition = transform.position;
         newPosition = currentPosition + movement;
         transform.position = newPosition;
     }
+
     private void Crouch()
     {
         if (hitLayer == 11)
@@ -158,30 +166,33 @@ public class Movements : MonoBehaviour
              canCrouch = false;
          }*/
 
-
         if (canCrouch)
         {
             // change height and offset
-            capsuleCollider.height = crouchHeight;
-            capsuleCollider.center = crouchCenter;
+            capsuleCollider.height = colliderCrouchHeight;
+            capsuleCollider.center = controllerCrouchCenter;
         }
         else
         {
-            capsuleCollider.height = standHeight;
-            capsuleCollider.center = standCenter;
+            capsuleCollider.height = colliderStandHeight;
+            capsuleCollider.center = ControllerStandCenter;
         }
-
 
     }
     private void Jump()
     {
-
+        //Debug.Log($"Y : {playerMove_.y} rb : {rb.velocity.y}");
+        if (playerJump_ && isGrounded)
+        {
+            // jump
+            rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
+        }
     }
+
     void IsGroundedCheck()
     {
-
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
         {
             Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.red);
             //Debug.Log($"hiting ground : {hit.transform.name}");
@@ -192,6 +203,12 @@ public class Movements : MonoBehaviour
             if (hit.distance < rayLength)
             {
                 isGrounded = true;
+                //Debug.Log($"IGT {isGrounded}");
+            }
+            else
+            {
+                isGrounded = false;
+                //Debug.Log($"IGF {isGrounded}");
             }
         }
     }
@@ -217,6 +234,7 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("Crouch", false);
         }
+
         if (inWater)
         {
             animator.SetBool("InWater", true);
@@ -227,14 +245,15 @@ public class Movements : MonoBehaviour
         {
             animator.SetBool("InWater", false);
         }
-        if (playerJump_)
+
+        /*if (playerJump_)
         {
             animator.SetBool("Jump", true);
         }
         else
         {
             animator.SetBool("Jump", false);
-        }
+        }*/
     }
 
     private void LateUpdate()
@@ -242,6 +261,7 @@ public class Movements : MonoBehaviour
         facingDirection = Vector3.Cross(mainCamera.transform.right, Vector3.up);
         transform.forward = facingDirection.normalized;
     }
+
     private void OnDisable()
     {
         inputActions.Disable();
@@ -257,9 +277,9 @@ public class Movements : MonoBehaviour
         inputActions.Player.Jump.performed -= GetJumpValue;
         inputActions.Player.Jump.canceled -= GetJumpValue;
 
-        inputActions.Interactions.Crouch.started -= GetCrouchValues;
-        inputActions.Interactions.Crouch.performed -= GetCrouchValues;
-        inputActions.Interactions.Crouch.canceled -= GetCrouchValues;
+        inputActions.Player.Crouch.started -= GetCrouchValues;
+        inputActions.Player.Crouch.performed -= GetCrouchValues;
+        inputActions.Player.Crouch.canceled -= GetCrouchValues;
     }
 
     #region needToBeDone

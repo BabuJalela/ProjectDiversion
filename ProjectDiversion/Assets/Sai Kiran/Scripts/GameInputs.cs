@@ -180,15 +180,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
             ""id"": ""cca379d4-7151-41d9-b29d-2c0670e8be58"",
             ""actions"": [
                 {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""595ba397-4cd0-4e97-8878-08926bd429d4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Interact "",
                     ""type"": ""Button"",
                     ""id"": ""2a5a99c0-6d17-4bbe-9753-e849a9e95fa1"",
@@ -199,17 +190,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""d5f698b0-9762-45c7-8425-6e9890ca568a"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""830813f0-5c84-4b2a-b052-bdc69baddf9f"",
@@ -252,7 +232,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
         // Interactions
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
-        m_Interactions_Crouch = m_Interactions.FindAction("Crouch", throwIfNotFound: true);
         m_Interactions_Interact = m_Interactions.FindAction("Interact ", throwIfNotFound: true);
     }
 
@@ -378,13 +357,11 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     // Interactions
     private readonly InputActionMap m_Interactions;
     private IInteractionsActions m_InteractionsActionsCallbackInterface;
-    private readonly InputAction m_Interactions_Crouch;
     private readonly InputAction m_Interactions_Interact;
     public struct InteractionsActions
     {
         private @GameInputs m_Wrapper;
         public InteractionsActions(@GameInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Crouch => m_Wrapper.m_Interactions_Crouch;
         public InputAction @Interact => m_Wrapper.m_Interactions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Interactions; }
         public void Enable() { Get().Enable(); }
@@ -395,9 +372,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_InteractionsActionsCallbackInterface != null)
             {
-                @Crouch.started -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnCrouch;
-                @Crouch.performed -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnCrouch;
-                @Crouch.canceled -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnCrouch;
                 @Interact.started -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InteractionsActionsCallbackInterface.OnInteract;
@@ -405,9 +379,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
             m_Wrapper.m_InteractionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Crouch.started += instance.OnCrouch;
-                @Crouch.performed += instance.OnCrouch;
-                @Crouch.canceled += instance.OnCrouch;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -434,7 +405,6 @@ public partial class @GameInputs : IInputActionCollection2, IDisposable
     }
     public interface IInteractionsActions
     {
-        void OnCrouch(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }
