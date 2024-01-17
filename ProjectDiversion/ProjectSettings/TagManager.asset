@@ -15,6 +15,12 @@ TagManager:
   - FakeBird
   - Ground
   - Fire
+  - Wakeup objective
+  - Run into the village objective
+  - Intraction Objective
+  - Main manision objective
+  - Key room objective
+  - Well & pumhouse objective
   layers:
   - Default
   - TransparentFX
