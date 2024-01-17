@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8668369850965184950, guid: c3fd56b8c009eb24b9fca0f92d476ec3, type: 3}
       propertyPath: m_Name
-      value: LP_Bay_Door_snaps Variant
+      value: MidDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3fd56b8c009eb24b9fca0f92d476ec3, type: 3}

@@ -16,6 +16,7 @@ public class LevelController : IController
     public void Initialize()
     {
         activeLevelManager = levelManagers[levelID];
+        activeLevelManager.OnInitialize();
     }
 
     public void RegisterListener()

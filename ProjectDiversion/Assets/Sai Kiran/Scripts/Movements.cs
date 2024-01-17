@@ -50,8 +50,8 @@ public class Movements : MonoBehaviour
     private void OnEnable()
     {
         mainCamera = Camera.main;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         inputActions = new GameInputs();
         inputActions.Enable();

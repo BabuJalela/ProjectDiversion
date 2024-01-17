@@ -1,22 +1,35 @@
-using Events;
+using System.Collections.Generic;
 
 public class AudioController : IController
 {
-    private Level2AudioManager level2AudioManager;
+    private BaseAudioManager activeAudioManager;
+    private Dictionary<string, BaseAudioManager> audioManagers;
+    private string levelID;
+
+    public AudioController(string levelID)
+    {
+        audioManagers = new Dictionary<string, BaseAudioManager>()
+        {
+            {levelIDs.LEVEL2, new Level2AudioManager() }
+        };
+        this.levelID = levelID;
+    }
+
+
     public void Initialize()
     {
-        level2AudioManager = new Level2AudioManager();
-        level2AudioManager.OnStart();
+        activeAudioManager = audioManagers[levelID];
+        activeAudioManager.OnInitialize();
     }
 
     public void RegisterListener()
     {
-        GameEventManager.Instance.AddListener<LeverPullEvent>(LeverPull);
+        activeAudioManager.OnRegisterListener();
     }
 
     public void UnRegisterListener()
     {
-        GameEventManager.Instance.RemoveListener<LeverPullEvent>(LeverPull);
+        activeAudioManager.OnUnregisterListener();
     }
 
     public void FixedUpdate()
@@ -25,13 +38,6 @@ public class AudioController : IController
     }
     public void Update()
     {
-        level2AudioManager.OnUpdate();
+        activeAudioManager.OnUpdate();
     }
-
-    #region LEVEL2 AUDIO MANAGER
-    private void LeverPull(LeverPullEvent e)
-    {
-        level2AudioManager.OnLeverPull(e.canFill);
-    }
-    #endregion
 }

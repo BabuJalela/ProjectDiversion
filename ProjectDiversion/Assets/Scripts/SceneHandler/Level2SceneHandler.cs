@@ -6,7 +6,7 @@ public class Level2SceneHandler : SceneHandler
     protected override void Initialize()
     {
         AddSceneController(new LevelController(levelID));
-        AddSceneController(new AudioController());
+        AddSceneController(new AudioController(levelID));
 
     }
 }

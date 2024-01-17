@@ -26,9 +26,15 @@ public class ObjectPickup : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F))
             {
+                if (hit.transform.gameObject.tag == "Pickup")
+                {
+                    StoreObjectToInventory(hit.transform.gameObject);
+                    return;
+                }
                 canGrab = !canGrab;
                 if (canGrab)
                 {
+
                     hit.transform.GetComponent<Rigidbody>().isKinematic = true;
                     hit.transform.SetParent(Camera.main.transform);
                 }
@@ -41,5 +47,11 @@ public class ObjectPickup : MonoBehaviour
 
         }
 
+    }
+
+    private void StoreObjectToInventory(GameObject objectToStore)
+    {
+        InventoryManager.instance.AddItem(objectToStore);
+        objectToStore.SetActive(false);
     }
 }
