@@ -24,11 +24,11 @@ public class RayCastWithBounce : MonoBehaviour
             points.Add(hit.point);
         }
 
-        Vector3 finalPoint = (points[^1] + transform.forward) * 100f;
+        Vector3 finalPoint = (points[^1] + (transform.forward * MaxDistance));
 
         if (hits.Count > 0)
         {
-            finalPoint = points[^1] + (Vector3.Reflect((points[^1] - points[^2]).normalized, hits[^1].normal) * 100f);
+            finalPoint = points[^1] + (Vector3.Reflect((points[^1] - points[^2]).normalized, hits[^1].normal) * MaxDistance);
         }
 
         points.Add(finalPoint);
