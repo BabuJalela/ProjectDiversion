@@ -6,10 +6,10 @@ public class Movements : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider capsuleCollider;
+    [SerializeField] private Camera mainCamera;
     private GameInputs inputActions;
-    private Camera mainCamera;
 
-    private Vector3 playerMove_;
+    public Vector3 playerMove_;
     private Vector3 moveDirection;
     private Vector3 movement;
     private Vector3 currentPosition;
@@ -40,6 +40,7 @@ public class Movements : MonoBehaviour
     private float applyWalkSpeed;
     private float applySprintSpeed;
     private int hitLayer;
+    [SerializeField] private float lookSpeed = 10f;
 
     /* // IK
      [SerializeField] private Transform rightToHold;
@@ -49,7 +50,7 @@ public class Movements : MonoBehaviour
 
     private void OnEnable()
     {
-        mainCamera = Camera.main;
+        //mainCamera = Camera.main;
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
 
@@ -127,6 +128,10 @@ public class Movements : MonoBehaviour
 
         if (inWater && !canCrouch)
         {
+            if (playerMove_.z < 0)
+            {
+                playerMove_.z = 0;
+            }
             applySprintSpeed = sprintSpeed / 2;
         }
         else if (canCrouch && !inWater)
@@ -258,8 +263,14 @@ public class Movements : MonoBehaviour
 
     private void LateUpdate()
     {
+        //IsGroundedCheck();
+        //Move();
+        ////Crouch();
+        //Jump();
+        //Animations();
         facingDirection = Vector3.Cross(mainCamera.transform.right, Vector3.up);
-        transform.forward = facingDirection.normalized;
+        //transform.forward = facingDirection.normalized;
+        transform.forward = (lookSpeed <= 0) ? facingDirection.normalized : Vector3.Lerp(transform.forward, facingDirection.normalized, Time.deltaTime * lookSpeed);
     }
 
     private void OnDisable()
@@ -309,11 +320,6 @@ public class Movements : MonoBehaviour
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, positionweight);
             }
         }
-    }*/
-
-    /*void Jump()
-    {
-        rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
     }*/
 
     #endregion

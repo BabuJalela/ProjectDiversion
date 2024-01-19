@@ -376,7 +376,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617857139}
-  m_LocalRotation: {x: -0.011838156, y: 0.98266304, z: -0.06753219, w: -0.17225741}
+  m_LocalRotation: {x: -0.010817153, y: 0.98515195, z: -0.06770322, w: -0.15740077}
   m_LocalPosition: {x: 9.307164, y: 1.521, z: 82.98189}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32058,6 +32058,98 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4474380468993858735, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380468993858735, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469105920810, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469105920810, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.12465091
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.008566466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98982894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380469379844280, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06802466
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470389617356, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470389617356, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.12465091
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470389617356, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.008566463
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470389617356, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98982894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470389617356, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.068024635
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470633416112, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470633416112, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.12465091
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470633416112, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.008566463
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470633416112, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98982894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470633416112, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.068024635
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470649430602, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470649430602, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4474380470773617296, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -32101,6 +32193,14 @@ PrefabInstance:
     - target: {fileID: 4474380470773617296, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474380470773617300, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 617857141}
+    - target: {fileID: 4474380470773617302, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
+      propertyPath: m_Constraints
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4474380470773617387, guid: 6c7e58874f85c4b4c98ed39b32b5f8a0, type: 3}
       propertyPath: m_Name
@@ -55873,6 +55973,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 0}
   capsuleCollider: {fileID: 0}
+  mainCamera: {fileID: 0}
+  playerMove_: {x: 0, y: 0, z: 0}
   ControllerStandCenter: {x: 0, y: 0, z: 0}
   controllerCrouchCenter: {x: 0, y: 0, z: 0}
   inWater: 0
@@ -55885,6 +55987,7 @@ MonoBehaviour:
   rayLength: 1
   colliderStandHeight: 0
   colliderCrouchHeight: 0
+  lookSpeed: 10
 --- !u!1 &6686355769386503255
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
     {
         playerMove_.x = context.ReadValue<Vector2>().x;
         playerMove_.z = context.ReadValue<Vector2>().y;
+
     }
     private void GetSprintValue(InputAction.CallbackContext context)
     {

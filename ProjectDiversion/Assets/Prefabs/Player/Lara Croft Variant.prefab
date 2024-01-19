@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &892033122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892033123}
+  m_Layer: 0
+  m_Name: CameraLookAT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892033123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892033122}
+  m_LocalRotation: {x: -0.028354943, y: 0.70653796, z: -0.028355032, w: 0.7065382}
+  m_LocalPosition: {x: 0, y: 0.00035694838, z: 0.013115898}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4474380470089331156}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4474380468792072450
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.5, z: -1.4}
+  m_FollowOffset: {x: 0, y: 1, z: -1.2}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -862,7 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.5, z: -1.4}
+  m_FollowOffset: {x: 0, y: 1, z: -1.2}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -2174,8 +2205,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380469379844287}
-  m_LocalRotation: {x: -0.009592577, y: 0.9878341, z: -0.06788757, w: -0.1395819}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.01765947, y: 0.9823274, z: 0.12917146, w: -0.13429733}
+  m_LocalPosition: {x: -0.000000059604645, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2208,7 +2239,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 4474380469933647677}
+  m_LookAt: {fileID: 892033123}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
@@ -5524,7 +5555,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 892033123}
   m_Father: {fileID: 4474380470773617296}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6666,8 +6698,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470389617347}
-  m_LocalRotation: {x: -0.009592577, y: 0.9878341, z: -0.06788757, w: -0.1395819}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.01765947, y: 0.9823274, z: 0.12917146, w: -0.13429734}
+  m_LocalPosition: {x: -0.000000014901161, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6700,7 +6732,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 4474380469933647677}
+  m_LookAt: {fileID: 892033123}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
@@ -6812,7 +6844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470435355074}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.014416553, y: 1.5, z: -1.3999226}
+  m_LocalPosition: {x: -0.012356706, y: 1, z: -1.1999364}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6840,7 +6872,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 4474380469933647677}
+  m_LookAt: {fileID: 892033123}
   m_Follow: {fileID: 4474380470773617296}
   m_CommonLens: 1
   m_Lens:
@@ -6861,7 +6893,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.5
+    Value: 0
     m_SpeedMode: 0
     m_MaxSpeed: 1
     m_AccelTime: 0.2
@@ -7750,8 +7782,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470633416119}
-  m_LocalRotation: {x: -0.009592577, y: 0.9878341, z: -0.06788757, w: -0.1395819}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.01765947, y: 0.9823274, z: 0.12917146, w: -0.13429734}
+  m_LocalPosition: {x: -0.000000014901161, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7784,7 +7816,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 4474380469933647677}
+  m_LookAt: {fileID: 892033123}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
@@ -7926,7 +7958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 0
-  m_FollowOffset: {x: 0, y: 1.5, z: -1.4}
+  m_FollowOffset: {x: 0, y: 1, z: -1.2}
   m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
@@ -8359,6 +8391,7 @@ GameObject:
   - component: {fileID: 4474380470773617302}
   - component: {fileID: 4474380470773617301}
   - component: {fileID: 4474380470773617300}
+  - component: {fileID: 339516834}
   m_Layer: 0
   m_Name: Lara Croft Variant
   m_TagString: Player
@@ -8418,7 +8451,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &4474380470773617301
 CapsuleCollider:
@@ -8449,6 +8482,8 @@ MonoBehaviour:
   animator: {fileID: 4474380470773617303}
   rb: {fileID: 4474380470773617302}
   capsuleCollider: {fileID: 4474380470773617301}
+  mainCamera: {fileID: 0}
+  playerMove_: {x: 0, y: 0, z: 0}
   ControllerStandCenter: {x: 0, y: 0.84, z: 0}
   controllerCrouchCenter: {x: 0, y: 0.5, z: 0}
   inWater: 0
@@ -8461,6 +8496,23 @@ MonoBehaviour:
   rayLength: 0.1
   colliderStandHeight: 1.7
   colliderCrouchHeight: 1
+  lookSpeed: 10
+--- !u!114 &339516834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4474380470773617387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ba1dae0691edb43bf8b969062ff0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  playerCam: {fileID: 4474380470435355075}
 --- !u!1 &4474380470775829317
 GameObject:
   m_ObjectHideFlags: 0
