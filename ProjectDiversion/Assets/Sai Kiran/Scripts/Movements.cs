@@ -175,10 +175,6 @@ public class Movements : MonoBehaviour
         {
             canCrouch = true;
         }
-        /* else
-         {
-             canCrouch = false;
-         }*/
 
         if (canCrouch)
         {
