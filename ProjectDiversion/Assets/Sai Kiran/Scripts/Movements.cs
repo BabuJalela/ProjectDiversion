@@ -6,7 +6,7 @@ public class Movements : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private CapsuleCollider capsuleCollider;
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
     private GameInputs inputActions;
 
     public Vector3 playerMove_;
@@ -25,6 +25,7 @@ public class Movements : MonoBehaviour
     public bool inWater;
     public bool stopPlayerMove;
     public bool canCrouch;
+    private bool canJump;
     private bool playerSprint_;
     private bool playerJump_;
     private bool isGrounded;
@@ -50,7 +51,7 @@ public class Movements : MonoBehaviour
 
     private void OnEnable()
     {
-        //mainCamera = Camera.main;
+        mainCamera = Camera.main;
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
 
@@ -85,7 +86,15 @@ public class Movements : MonoBehaviour
 
     private void GetJumpValue(InputAction.CallbackContext context)
     {
-        playerJump_ = context.ReadValueAsButton();
+        //playerJump_ = context.ReadValueAsButton();
+        if (context.performed)
+        {
+            canJump = true;
+        }
+        else
+        {
+            canJump = false;
+        }
     }
 
     private void GetCrouchValues(InputAction.CallbackContext context)
@@ -187,7 +196,7 @@ public class Movements : MonoBehaviour
     private void Jump()
     {
         //Debug.Log($"Y : {playerMove_.y} rb : {rb.velocity.y}");
-        if (playerJump_ && isGrounded)
+        if (canJump && isGrounded)
         {
             // jump
             rb.AddForce(jumpForce * Vector3.up, ForceMode.Impulse);

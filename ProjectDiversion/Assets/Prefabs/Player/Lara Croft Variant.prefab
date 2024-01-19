@@ -2205,8 +2205,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380469379844287}
-  m_LocalRotation: {x: 0.01765947, y: 0.9823274, z: 0.12917146, w: -0.13429733}
-  m_LocalPosition: {x: -0.000000059604645, y: 0, z: 0}
+  m_LocalRotation: {x: 0.017659388, y: 0.98232746, z: 0.12917113, w: -0.13429706}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6698,8 +6698,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470389617347}
-  m_LocalRotation: {x: 0.01765947, y: 0.9823274, z: 0.12917146, w: -0.13429734}
-  m_LocalPosition: {x: -0.000000014901161, y: 0, z: 0}
+  m_LocalRotation: {x: 0.017659396, y: 0.98232746, z: 0.12917118, w: -0.13429709}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6844,7 +6844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470435355074}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.012356706, y: 1, z: -1.1999364}
+  m_LocalPosition: {x: -0.012356676, y: 1, z: -1.199937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7782,8 +7782,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4474380470633416119}
-  m_LocalRotation: {x: 0.01765947, y: 0.9823274, z: 0.12917146, w: -0.13429734}
-  m_LocalPosition: {x: -0.000000014901161, y: 0, z: 0}
+  m_LocalRotation: {x: 0.017659396, y: 0.98232746, z: 0.12917118, w: -0.13429709}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8482,7 +8482,6 @@ MonoBehaviour:
   animator: {fileID: 4474380470773617303}
   rb: {fileID: 4474380470773617302}
   capsuleCollider: {fileID: 4474380470773617301}
-  mainCamera: {fileID: 0}
   playerMove_: {x: 0, y: 0, z: 0}
   ControllerStandCenter: {x: 0, y: 0.84, z: 0}
   controllerCrouchCenter: {x: 0, y: 0.5, z: 0}
